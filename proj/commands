@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+安装并启动MQ
+yum install rabbitmq
+service rabbitmq-server start
+
+启动MQ的监控插件
+cd /usr/lib/rabbitmq/bin/
+sudo rabbitmq-plugins enable rabbitmq_management
+service rabbitmq-server restart
+访问地址：http://localhost:15672  guest  guest
+
+启动celery的监控插件
+celery flower 5555
+访问地址：http://localhost:5555
+
+启动一个worker
+python manage.py celery worker --loglevel=info
+
+启动监控定时任务的服务，任务到时间则推送到worker中去执行
+python manage.py celery worker -B
+
+
+
