@@ -20,5 +20,11 @@ python manage.py celery worker --loglevel=info
 启动监控定时任务的服务，任务到时间则推送到worker中去执行
 python manage.py celery worker -B
 
+启动网站
+python manage.py runserver 0.0.0.0:8001
+
+任务需要先在项目中定义，然后才可以调用。
+普通任务的调用，只需send_task即可。定时任务则需要向定时任务相关表添加数据才可以。
+定时任务可以到admin中添加定时任务，也可以在项目中直接把
 
 
