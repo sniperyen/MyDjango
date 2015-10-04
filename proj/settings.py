@@ -1,3 +1,4 @@
+# coding=utf-8
 """
 Django settings for untitled project.
 
@@ -10,6 +11,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -28,7 +30,8 @@ ALLOWED_HOSTS = []
 
 # celery settings
 import djcelery
-djcelery.setup_loader ()
+
+djcelery.setup_loader()
 
 BROKER_URL = 'amqp://guest:guest@192.168.30.251:5672//'
 CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
@@ -44,6 +47,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'celery_demo',
     'djcelery',
+    'timer',
+    'utils',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -53,6 +58,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 )
 
 ROOT_URLCONF = 'proj.urls'
@@ -72,14 +78,15 @@ DATABASES = {
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
+LANGUAGES_SUPPORTED = ('en-us', 'zh-cn',)
 
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
-USE_I18N = True
+USE_I18N = True  # 国际化 -- Internationalization，i 和 n 之间有 18 个字母，简称 I18N
 
-USE_L10N = True
+USE_L10N = True  # 本地化 -- localization， l 和 n 之间有 10 个字母，简称 L10N
 
 USE_TZ = True
 
@@ -90,5 +97,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR,  'templates'),
+    os.path.join(BASE_DIR, 'templates'),
+)
+TEMPLATE_CONTEXT_PROCESSORS = ('django.core.context_processors.i18n',
+                               'django.contrib.auth.context_processors.auth',
 )
