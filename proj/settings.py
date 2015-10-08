@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+import logging
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -45,13 +46,14 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'celery_demo',
+    'debug_toolbar',
     'djcelery',
-    'timer',
+    'celery_demo',
     'utils',
 )
 
 MIDDLEWARE_CLASSES = (
+    'proj.middleware.BlockedIpMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -59,6 +61,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.locale.LocaleMiddleware',
+    'proj.middleware.UserBasedExceptionMiddleware',
 )
 
 ROOT_URLCONF = 'proj.urls'
@@ -94,11 +97,24 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
+# 静态文件访问的设置
 STATIC_URL = '/static/'
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_resources/').replace('\\', '/')  # 开发环境用不到，生产环境才用到
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "uploads").replace('\\', '/')
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+)
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),
 )
 TEMPLATE_CONTEXT_PROCESSORS = ('django.core.context_processors.i18n',
                                'django.contrib.auth.context_processors.auth',
 )
+
+
+# CRITICAL > ERROR > WARNING > INFO > DEBUG > NOTSET
+logging.basicConfig(level=logging.INFO,
+                    format='%(filename)s[line:%(lineno)d] %(levelname)s (%(thread)d) (%(asctime)s) %(message)s',
+                    datefmt='%H:%M:%S',
+                    )

@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://E:/code/trunk/oss/.idea/oss.iml" filepath="E:/code/trunk/oss/.idea/oss.iml" />
       <module fileurl="file://$USER_HOME$/PycharmProjects/proj/.idea/proj.iml" filepath="$USER_HOME$/PycharmProjects/proj/.idea/proj.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/whenwillyoucallme.iml" filepath="$PROJECT_DIR$/.idea/whenwillyoucallme.iml" />
     </modules>

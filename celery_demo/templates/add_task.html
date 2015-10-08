@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加任务</title>
+    <script src="/static/js/jquery-1.10.1.min.js"></script>
+</head>
+<body>
+<div class="main">
+    <form>
+    {% csrf_token %}
+        <input type="submit" value="开机"/>
+        <input type="submit" value="5S后关机"/>
+    </form>
+</div>
+
+</body>
+<script>
+    $main = $('.main')
+    function open_s(){
+        options={
+            url: "",
+            type: "post",
+            success: function (data) {
+                $main.after('开机\n\n')
+            }
+        };
+    }
+
+    function close_s(){
+        $main.after('开始关闭\n\n');
+{#        $main.after('已关闭\n\n');#}
+    }
+</script>
+</html>
