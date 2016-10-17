@@ -50,7 +50,7 @@ INSTALLED_APPS = (
     # 第三方应用
     'debug_toolbar',  # 调试工具
     'bootstrap_toolkit',  # 样式
-    'django-admin-bootstrapped',  # admin样式
+    'django_admin_bootstrapped',  # admin样式
     'djcelery',  # 定时
 
     # 测试应用
@@ -63,6 +63,7 @@ INSTALLED_APPS = (
 
 MIDDLEWARE_CLASSES = (
     'MyDjango.middleware.BlockedIpMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
