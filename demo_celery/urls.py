@@ -5,6 +5,6 @@ from views import *
 
 
 urlpatterns=patterns("",
-    url(r"^add_task/(?P<nums>\d*)$", add_task,name="add_task"),
+    url(r"^add_task/(?P<seconds>\d*)$", add_task,name="add_task"),
 )
 

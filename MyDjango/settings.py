@@ -15,7 +15,6 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
@@ -40,20 +39,30 @@ CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
 # Application definition
 
 INSTALLED_APPS = (
+    # 内置应用
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'debug_toolbar',
-    'djcelery',
-    'celery_demo',
+
+    # 第三方应用
+    'debug_toolbar',  # 调试工具
+    'bootstrap_toolkit',  # 样式
+    'django-admin-bootstrapped',  # admin样式
+    'djcelery',  # 定时
+
+    # 测试应用
+    'demo_bootstrap',  # bootstrap的一个示例app
+    'demo_celery',
+
+    # 公共应用
     'utils',
 )
 
 MIDDLEWARE_CLASSES = (
-    'proj.middleware.BlockedIpMiddleware',
+    'MyDjango.middleware.BlockedIpMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -61,13 +70,12 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.locale.LocaleMiddleware',
-    'proj.middleware.UserBasedExceptionMiddleware',
+    'MyDjango.middleware.UserBasedExceptionMiddleware',
 )
 
-ROOT_URLCONF = 'proj.urls'
+ROOT_URLCONF = 'MyDjango.urls'
 
-WSGI_APPLICATION = 'proj.wsgi.application'
-
+WSGI_APPLICATION = 'MyDjango.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
@@ -93,7 +101,6 @@ USE_L10N = True  # 本地化 -- localization， l 和 n 之间有 10 个字母�
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
@@ -110,11 +117,41 @@ TEMPLATE_DIRS = (
 )
 TEMPLATE_CONTEXT_PROCESSORS = ('django.core.context_processors.i18n',
                                'django.contrib.auth.context_processors.auth',
-)
-
+                               )
 
 # CRITICAL > ERROR > WARNING > INFO > DEBUG > NOTSET
-logging.basicConfig(level=logging.INFO,
-                    format='%(filename)s[line:%(lineno)d] %(levelname)s (%(thread)d) (%(asctime)s) %(message)s',
-                    datefmt='%H:%M:%S',
-                    )
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(filename)s[line:%(lineno)d] %(levelname)s (%(thread)d) (%(asctime)s) %(message)s',
+    datefmt='%H:%M:%S',
+)
+
+# A sample logging configuration. The only tangible logging
+# performed by this configuration is to send an email to
+# the site admins on every HTTP 500 error.
+# See http://docs.djangoproject.com/en/dev/topics/logging for
+# more details on how to customize your logging configuration.
+
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'filters': {
+#          'require_debug_false': {
+#              '()': 'django.utils.log.RequireDebugFalse'
+#          }
+#     },
+#     'handlers': {
+#         'mail_admins': {
+#             'level': 'ERROR',
+#             'filters': ['require_debug_false'],
+#             'class': 'django.utils.log.AdminEmailHandler'
+#         }
+#     },
+#     'loggers': {
+#         'django.request': {
+#             'handlers': ['mail_admins'],
+#             'level': 'ERROR',
+#             'propagate': True,
+#         },
+#     },
+# }

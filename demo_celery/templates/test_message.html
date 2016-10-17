@@ -1,0 +1,64 @@
+<html lang="en">
+
+{% load bootstrap_toolkit %}
+{% block extra_head %}
+    {{ form.media }}
+{% endblock %}
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312"/>
+    <title>氪金眼</title>
+    {% bootstrap_stylesheet_tag %}
+    {% bootstrap_stylesheet_tag "responsive" %}
+    <style type="text/css">
+        body {
+            padding-top: 8px;
+            bgcolor: "#CCCCCC"
+        }
+    </style>
+
+    <!--[if lt IE 9]>
+    <script src="//www.ysgh.net/myfiles/html5.js"></script>
+    <![endif]-->
+    <script src="//www.ysgh.net/myfiles/jquery.min.js"></script>
+    {% bootstrap_javascript_tag %}
+</head>
+
+<body>
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="brand" href="/">氪金眼</a>
+            <ul class="nav">
+                <li><a href="http://www.ysgh.net" class="">返回首页</a></li>
+                <li><a href="http://www.ysgh.net" class="">工具说明</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+</div>
+<hr>
+<br><br>
+<div class="container">
+    {% bootstrap_messages %}
+</div>
+
+<p> {{ result }} </p>
+<form class="form-horizontal" action="" method="post">
+    <table>
+        {% csrf_token %}
+        {{ form|as_bootstrap:"horizontal" }}
+    </table>
+    <p class="form-actions">
+        <input type="submit" value="开始监视!" class="btn btn-primary">
+    </p>
+</form>
+
+all user:<br>
+<table>
+    {{ alldata }}
+</table>
+
+</body>
+</html>

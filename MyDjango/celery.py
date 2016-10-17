@@ -6,9 +6,9 @@ from celery import Celery, platforms
 from django.conf import settings
 
 # set the default Django settings module for the 'celery' program.
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'proj.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'MyDjango.settings')
 
-app = Celery('proj')
+app = Celery('MyDjango')
 platforms.C_FORCE_ROOT = True
 
 # Using a string here means the worker will not have to
