@@ -1,30 +1,19 @@
-from django.conf.urls import patterns, url
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 
-# Uncomment the next two lines to enable the admin:
-# from django.contrib import admin
-# admin.autodiscover()
-from django.views.generic import TemplateView
+from django.conf.urls import url
 
-urlpatterns = patterns(
-    '',
-    # Examples:
-    # url(r'^$', 'demo_project.views.home', name='home'),
-    # url(r'^demo_project/', include('demo_project.foo.urls')),
+from .views import HomePageView, FormHorizontalView, FormInlineView, PaginationView, FormWithFilesView, \
+    DefaultFormView, MiscView, DefaultFormsetView, DefaultFormByFieldView
 
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
-    # url(r'^admin/', include(admin.site.urls)),
-
-    url(r'^$', TemplateView.as_view(template_name='index.html'), name="home"),
-    url(r'^contact$', TemplateView.as_view(template_name='contact.html'), name="contact"),
-    url(r'^form$', 'demo_bootstrap.views.demo_form'),
-    url(r'^form_template$', 'demo_bootstrap.views.demo_form_with_template'),
-    url(r'^form_inline$', 'demo_bootstrap.views.demo_form_inline'),
-    url(r'^formset$', 'demo_bootstrap.views.demo_formset', {}, "formset"),
-    url(r'^tabs$', 'demo_bootstrap.views.demo_tabs', {}, "tabs"),
-    url(r'^pagination$', 'demo_bootstrap.views.demo_pagination', {}, "pagination"),
-    url(r'^widgets$', 'demo_bootstrap.views.demo_widgets', {}, "widgets"),
-    url(r'^buttons$', TemplateView.as_view(template_name='buttons.html'), name="buttons"),
-)
+urlpatterns = [
+    url(r'^$', HomePageView.as_view(), name='home'),
+    url(r'^formset$', DefaultFormsetView.as_view(), name='formset_default'),
+    url(r'^form$', DefaultFormView.as_view(), name='form_default'),
+    url(r'^form_by_field$', DefaultFormByFieldView.as_view(), name='form_by_field'),
+    url(r'^form_horizontal$', FormHorizontalView.as_view(), name='form_horizontal'),
+    url(r'^form_inline$', FormInlineView.as_view(), name='form_inline'),
+    url(r'^form_with_files$', FormWithFilesView.as_view(), name='form_with_files'),
+    url(r'^pagination$', PaginationView.as_view(), name='pagination'),
+    url(r'^misc$', MiscView.as_view(), name='misc'),
+]

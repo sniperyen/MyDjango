@@ -1,115 +1,94 @@
-from django.contrib import messages
-from django.forms.formsets import formset_factory
-from django.shortcuts import render_to_response
-from django.template.context import RequestContext
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+from django.core.files.storage import default_storage
+
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.db.models.fields.files import FieldFile
+from django.views.generic import FormView
+from django.views.generic.base import TemplateView
+from django.contrib import messages
 
-from bootstrap_toolkit.widgets import BootstrapUneditableInput
-
-from .forms import TestForm, TestModelForm, TestInlineForm, WidgetsForm, FormSetInlineForm
-
-
-def demo_form_with_template(request):
-    layout = request.GET.get('layout')
-    if not layout:
-        layout = 'vertical'
-    if request.method == 'POST':
-        form = TestForm(request.POST)
-        form.is_valid()
-    else:
-        form = TestForm()
-    modelform = TestModelForm()
-    return render_to_response('form_using_template.html', RequestContext(request, {
-        'form': form,
-        'layout': layout,
-    }))
-
-def demo_form(request):
-    messages.success(request, 'I am a success message.')
-    layout = request.GET.get('layout')
-    if not layout:
-        layout = 'vertical'
-    if request.method == 'POST':
-        form = TestForm(request.POST)
-        form.is_valid()
-    else:
-        form = TestForm()
-    form.fields['title'].widget = BootstrapUneditableInput()
-    return render_to_response('form.html', RequestContext(request, {
-        'form': form,
-        'layout': layout,
-    }))
-
-def demo_form_inline(request):
-    layout = request.GET.get('layout', '')
-    if layout != 'search':
-        layout = 'inline'
-    form = TestInlineForm()
-    return render_to_response('form_inline.html', RequestContext(request, {
-        'form': form,
-        'layout': layout,
-    }))
+from .forms import ContactForm, FilesForm, ContactFormSet
 
 
-def demo_formset(request):
-    layout = request.GET.get('layout')
-    if not layout:
-        layout = 'inline'
-    DemoFormSet = formset_factory(FormSetInlineForm)
-    if request.method == 'POST':
-        formset = DemoFormSet(request.POST, request.FILES)
-        formset.is_valid()
-    else:
-        formset = DemoFormSet()
-    return render_to_response('formset.html', RequestContext(request, {
-        'formset': formset,
-        'layout': layout,
-    }))
+# http://yuji.wordpress.com/2013/01/30/django-form-field-in-initial-data-requires-a-fieldfile-instance/
+class FakeField(object):
+    storage = default_storage
 
 
-def demo_tabs(request):
-    layout = request.GET.get('layout')
-    if not layout:
-        layout = 'tabs'
-    tabs = [
-        {
-            'link': "#",
-            'title': 'Tab 1',
-            },
-        {
-            'link': "#",
-            'title': 'Tab 2',
-            }
-    ]
-    return render_to_response('tabs.html', RequestContext(request, {
-        'tabs': tabs,
-        'layout': layout,
-    }))
+fieldfile = FieldFile(None, FakeField, 'dummy.txt')
 
 
-def demo_pagination(request):
-    lines = []
-    for i in range(10000):
-        lines.append(u'Line %s' % (i + 1))
-    paginator = Paginator(lines, 10)
-    page = request.GET.get('page')
-    try:
-        show_lines = paginator.page(page)
-    except PageNotAnInteger:
-        # If page is not an integer, deliver first page.
-        show_lines = paginator.page(1)
-    except EmptyPage:
-        # If page is out of range (e.g. 9999), deliver last page of results.
-        show_lines = paginator.page(paginator.num_pages)
-    return render_to_response('pagination.html', RequestContext(request, {
-        'lines': show_lines,
-    }))
+class HomePageView(TemplateView):
+    template_name = 'demo/home.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(HomePageView, self).get_context_data(**kwargs)
+        messages.info(self.request, 'hello http://example.com')
+        return context
 
 
-def demo_widgets(request):
-    layout = request.GET.get('layout', 'vertical')
-    form = WidgetsForm()
-    return render_to_response('form.html', RequestContext(request, {
-        'form': form,
-        'layout': layout,
-    }))
+class DefaultFormsetView(FormView):
+    template_name = 'demo/formset.html'
+    form_class = ContactFormSet
+
+
+class DefaultFormView(FormView):
+    template_name = 'demo/form.html'
+    form_class = ContactForm
+
+
+class DefaultFormByFieldView(FormView):
+    template_name = 'demo/form_by_field.html'
+    form_class = ContactForm
+
+
+class FormHorizontalView(FormView):
+    template_name = 'demo/form_horizontal.html'
+    form_class = ContactForm
+
+
+class FormInlineView(FormView):
+    template_name = 'demo/form_inline.html'
+    form_class = ContactForm
+
+
+class FormWithFilesView(FormView):
+    template_name = 'demo/form_with_files.html'
+    form_class = FilesForm
+
+    def get_context_data(self, **kwargs):
+        context = super(FormWithFilesView, self).get_context_data(**kwargs)
+        context['layout'] = self.request.GET.get('layout', 'vertical')
+        return context
+
+    def get_initial(self):
+        return {
+            'file4': fieldfile,
+        }
+
+
+class PaginationView(TemplateView):
+    template_name = 'demo/pagination.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(PaginationView, self).get_context_data(**kwargs)
+        lines = []
+        for i in range(200):
+            lines.append('Line %s' % (i + 1))
+        paginator = Paginator(lines, 10)
+        page = self.request.GET.get('page')
+        try:
+            show_lines = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            show_lines = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 9999), deliver last page of results.
+            show_lines = paginator.page(paginator.num_pages)
+        context['lines'] = show_lines
+        return context
+
+
+class MiscView(TemplateView):
+    template_name = 'demo/misc.html'
