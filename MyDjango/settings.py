@@ -48,10 +48,10 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     # 第三方应用
-    'debug_toolbar',  # 调试工具
-    'bootstrap_toolkit',  # 样式
-    'django_admin_bootstrapped',  # admin样式
+    'Lib.bootstrap3',  # 样式
     'djcelery',  # 定时
+    'debug_toolbar',  # 调试工具
+    'django_admin_bootstrapped',  # admin样式
 
     # 测试应用
     'demo_bootstrap',  # bootstrap的一个示例app
@@ -133,26 +133,36 @@ logging.basicConfig(
 # See http://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
 
-# LOGGING = {
-#     'version': 1,
-#     'disable_existing_loggers': False,
-#     'filters': {
-#          'require_debug_false': {
-#              '()': 'django.utils.log.RequireDebugFalse'
-#          }
-#     },
-#     'handlers': {
-#         'mail_admins': {
-#             'level': 'ERROR',
-#             'filters': ['require_debug_false'],
-#             'class': 'django.utils.log.AdminEmailHandler'
-#         }
-#     },
-#     'loggers': {
-#         'django.request': {
-#             'handlers': ['mail_admins'],
-#             'level': 'ERROR',
-#             'propagate': True,
-#         },
-#     },
-# }
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+         'require_debug_false': {
+             '()': 'django.utils.log.RequireDebugFalse'
+         }
+    },
+    'handlers': {
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler'
+        }
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    },
+}
+
+# Settings for django-bootstrap3
+BOOTSTRAP3 = {
+    'set_required': False,
+    'error_css_class': 'bootstrap3-error',
+    'required_css_class': 'bootstrap3-required',
+    'javascript_in_head': True,
+    'jquery_url': os.path.join(STATIC_URL, 'js/jquery.min.js'),
+    'base_url': os.path.join(STATIC_URL, 'bootstrap/'),
+}

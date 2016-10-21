@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../MyDjango/.idea/MyDjango.iml" filepath="$PROJECT_DIR$/../MyDjango/.idea/MyDjango.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../django-bootstrap-toolkit/demo_project/.idea/demo_project.iml" filepath="$PROJECT_DIR$/../django-bootstrap-toolkit/demo_project/.idea/demo_project.iml" />
-      <module fileurl="file://E:/code/trunk/oss/.idea/oss.iml" filepath="E:/code/trunk/oss/.idea/oss.iml" />
-      <module fileurl="file://$USER_HOME$/PycharmProjects/proj/.idea/proj.iml" filepath="$USER_HOME$/PycharmProjects/proj/.idea/proj.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/whenwillyoucallme.iml" filepath="$PROJECT_DIR$/.idea/whenwillyoucallme.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/MyDjango.iml" filepath="$PROJECT_DIR$/.idea/MyDjango.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../portal/.idea/portal.iml" filepath="$PROJECT_DIR$/../portal/.idea/portal.iml" />
     </modules>
   </component>
 </project>
