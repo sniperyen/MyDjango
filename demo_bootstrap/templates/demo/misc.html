@@ -1,5 +1,5 @@
 {% extends 'demo/base.html' %}
-
+{% load static %}
 {% load bootstrap3 %}
 
 {% block title %}
@@ -7,10 +7,12 @@
 {% endblock %}
 
 {% block content %}
+按钮样式示例： <img src="{% static "image/button_style.png" %}" alt="">
+    <br>
 
-    {% bootstrap_button 'button' size='lg' %}
+    {% bootstrap_button 'button' size='lg' button_class="btn-primary" %}
 
-    {% bootstrap_button 'button' size='lg' icon='info-sign' %}
+    {% bootstrap_button 'button' size='small' icon='info-sign' button_class="btn-danger" %}
 
     {% bootstrap_alert "Something went wrong" alert_type='danger' %}
 

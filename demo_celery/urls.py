@@ -4,7 +4,8 @@ from django.views.generic import TemplateView
 from views import *
 
 
-urlpatterns=patterns("",
-    url(r"^add_task/(?P<seconds>\d*)$", add_task,name="add_task"),
+urlpatterns=patterns(
+    "",
+    url(r"^add_task$", AddTask.as_view(), name="add_task"),
 )
 

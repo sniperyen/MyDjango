@@ -1,16 +1,21 @@
+{% load static %}
+{% load bootstrap3 %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>添加任务</title>
-    <script src="/static/js/jquery-1.10.1.min.js"></script>
+    <script src="{% static "js/jquery.min.js" %}"></script>
 </head>
 <body>
 <div class="main">
     <form>
     {% csrf_token %}
-        <input type="submit" value="开机"/>
-        <input type="submit" value="5S后关机"/>
+        <span class="glyphicon glyphicon-adjust"></span>
+        <input type="text" button-tooltip="输入正整数">
+        {% bootstrap_button '开机' size='lg' icon='info-sign' button_class="btn-primary"%}
+        {% bootstrap_button '关机' size='lg' icon='info-sign' button_class="btn-primary" %}
     </form>
 </div>
 
@@ -26,6 +31,7 @@
                 $main.after('开机\n\n')
             }
         };
+        $.ajax(options);
     }
 
     function close_s(){
