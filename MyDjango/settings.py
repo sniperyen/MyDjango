@@ -1,42 +1,12 @@
 # coding=utf-8
-"""
-Django settings for untitled project.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/1.6/topics/settings/
-
-For the full list of settings and their values, see
-https://docs.djangoproject.com/en/1.6/ref/settings/
-"""
-
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import logging
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'z*#yeb0$qt0r!$q+^jzd2rs3#xiefty*gs!%2n2(=b!5)129kf'
-
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
 TEMPLATE_DEBUG = True
-
 ALLOWED_HOSTS = []
-
-# celery settings
-import djcelery
-
-djcelery.setup_loader()
-
-BROKER_URL = 'amqp://guest:guest@192.168.30.251:5672//'
-CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
-
-# Application definition
 
 INSTALLED_APPS = (
     # 内置应用
@@ -78,9 +48,6 @@ ROOT_URLCONF = 'MyDjango.urls'
 
 WSGI_APPLICATION = 'MyDjango.wsgi.application'
 
-# Database
-# https://docs.djangoproject.com/en/1.6/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -88,24 +55,16 @@ DATABASES = {
     }
 }
 
-# Internationalization
-# https://docs.djangoproject.com/en/1.6/topics/i18n/
+# region Settings for Internationalization
 LANGUAGES_SUPPORTED = ('en-us', 'zh-cn',)
-
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True  # 国际化 -- Internationalization，i 和 n 之间有 18 个字母，简称 I18N
-
 USE_L10N = True  # 本地化 -- localization， l 和 n 之间有 10 个字母，简称 L10N
-
 USE_TZ = True
+# endregion
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.6/howto/static-files/
-
-# 静态文件访问的设置
+# region Setting for (JS/CSS/IMAGE/TEMPLATE)
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_resources/').replace('\\', '/')  # 开发环境用不到，生产环境才用到
 MEDIA_URL = '/media/'
@@ -119,7 +78,28 @@ TEMPLATE_DIRS = (
 TEMPLATE_CONTEXT_PROCESSORS = ('django.core.context_processors.i18n',
                                'django.contrib.auth.context_processors.auth',
                                )
+# endregion
 
+# region Settings for django-bootstrap3
+BOOTSTRAP3 = {
+    'set_required': False,
+    'error_css_class': 'bootstrap3-error',
+    'required_css_class': 'bootstrap3-required',
+    'javascript_in_head': True,
+    'jquery_url': os.path.join(STATIC_URL, 'js/jquery.min.js'),
+    'base_url': os.path.join(STATIC_URL, 'bootstrap/'),
+}
+# endregion
+
+# region Settings for celery
+import djcelery
+djcelery.setup_loader()
+
+BROKER_URL = 'amqp://guest:guest@127.0.0.1:5672//'
+CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
+# endregion
+
+# region Settings for log
 # CRITICAL > ERROR > WARNING > INFO > DEBUG > NOTSET
 logging.basicConfig(
     level=logging.INFO,
@@ -156,13 +136,4 @@ LOGGING = {
         },
     },
 }
-
-# Settings for django-bootstrap3
-BOOTSTRAP3 = {
-    'set_required': False,
-    'error_css_class': 'bootstrap3-error',
-    'required_css_class': 'bootstrap3-required',
-    'javascript_in_head': True,
-    'jquery_url': os.path.join(STATIC_URL, 'js/jquery.min.js'),
-    'base_url': os.path.join(STATIC_URL, 'bootstrap/'),
-}
+# endregion
