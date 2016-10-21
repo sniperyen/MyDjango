@@ -6,16 +6,17 @@
 <head>
     <meta charset="UTF-8">
     <title>添加任务</title>
-    <script src="{% static "js/jquery.min.js" %}"></script>
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery=1 %}
 </head>
 <body>
 <div class="main">
     <form>
     {% csrf_token %}
-        <span class="glyphicon glyphicon-adjust"></span>
+        {% bootstrap_icon "camera" %}
         <input type="text" button-tooltip="输入正整数">
-        {% bootstrap_button '开机' size='lg' icon='info-sign' button_class="btn-primary"%}
-        {% bootstrap_button '关机' size='lg' icon='info-sign' button_class="btn-primary" %}
+        {% bootstrap_button '开机' size='small' button_class="btn-primary"%}
+        {% bootstrap_button '关机' size='small' button_class="btn-danger" %}
     </form>
 </div>
 

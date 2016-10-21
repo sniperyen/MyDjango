@@ -6,6 +6,6 @@ from views import *
 
 urlpatterns=patterns(
     "",
-    url(r"^add_task$", AddTask.as_view(), name="add_task"),
+    url(r"^add_task/", AddTask.as_view(), name="add_task"),
 )
 
