@@ -10,11 +10,14 @@
     {% bootstrap_javascript jquery=1 %}
 </head>
 <body>
-<div class="main">
-    <form>
+<div class="container" style="width: 50%;">
+    <form role="form">
     {% csrf_token %}
-        {% bootstrap_icon "camera" %}
-        <input type="text" button-tooltip="输入正整数">
+        <div class="form-group">
+        {% bootstrap_label "多久后：" label_for="seconds" %}
+        <input type="text" name="seconds" placeholder="输入正整数"  class="form-control">
+        </div>
+
         {% bootstrap_button '开机' size='small' button_class="btn-primary"%}
         {% bootstrap_button '关机' size='small' button_class="btn-danger" %}
     </form>

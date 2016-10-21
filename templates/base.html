@@ -1,0 +1,29 @@
+{% extends 'bootstrap.html' %}
+
+{% load bootstrap3 %}
+
+{% block bootstrap3_extra_head %}
+    <meta name="description" content="">
+    <meta name="author" content="wangsy">
+    <link rel="shortcut icon" href="/static/image/favicon.png">
+    <style>
+        /* Move down content because we have a fixed navbar that is 50px tall */
+        body {
+          padding-top: 50px;
+          padding-bottom: 20px;
+        }
+
+    </style>
+{% endblock %}
+
+{% block title %}
+facecdn - 离家最近一公里
+{% endblock %}
+
+{% block bootstrap3_content %}
+
+    {% block content %}这里填充你想填充的内容{% endblock %}
+
+    {% autoescape off %}{% bootstrap_messages %}{% endautoescape %}
+
+{% endblock %}

@@ -4,6 +4,7 @@ from django.conf import settings
 
 # from django.contrib import admin
 # admin.autodiscover()
+from django.views.generic import TemplateView
 
 urlpatterns = patterns(
     '',
@@ -13,6 +14,7 @@ urlpatterns = patterns(
     # url(r'^admin/', include(admin.site.urls)),  # 管理后台
     url(r'^setlang/$', 'django.views.i18n.set_language', name='setlang'),  # 全局语言设置
 
+    url(r'^$', TemplateView.as_view(template_name="index.html"), name="index"),
 
     url(r'^demo_celery/', include('demo_celery.urls'), name='demo_celery'),  # 定时任务
     url(r'^demo_bootstrap/', include('demo_bootstrap.urls'), name='demo_bootstrap'),  # 基于bootstrap的测试app

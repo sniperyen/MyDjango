@@ -1,2 +1,3 @@
-django
+django==1.8.15
 celery
+django-bootstrap3
