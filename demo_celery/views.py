@@ -15,7 +15,7 @@ __author__ = 'sanyang'
 class AddTask(TemplateView):
     template_name = "add_task.html"
 
-    def post(self):
+    def post(self, *args, **kwargs):
         seconds = self.request.POST.get('seconds')
 
         if seconds:  # 几秒后执行任务

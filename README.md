@@ -5,3 +5,15 @@
 * 定时任务和异步： 利用 RabbitMQ+celery，来实现异步功能和定时任务，执行结果存在数据库中
 * 网站国际化：不管是后台还是前台的静态文本，都可翻译
 * 集成bootstrap3来实现前端页面优化
+* 使用xadmin替换了原有简陋的admin
+
+## 运行方式
+```
+cd ./MyDjango
+python manage.py runserver
+
+```
+
+## 相关地址
+
+* 后台管理系统 http://127.0.0.1:8000/admin   用户名：admin 密码：password

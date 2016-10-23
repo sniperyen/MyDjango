@@ -11,15 +11,15 @@
 </head>
 <body>
 <div class="container" style="width: 50%;">
-    <form role="form">
+    <form id="form" role="form">
     {% csrf_token %}
         <div class="form-group">
-        {% bootstrap_label "多久后：" label_for="seconds" %}
+        {% bootstrap_label "多久执行一次任务：" label_for="seconds" %}
         <input type="text" name="seconds" placeholder="输入正整数"  class="form-control">
         </div>
 
-        {% bootstrap_button '开机' size='small' button_class="btn-primary"%}
-        {% bootstrap_button '关机' size='small' button_class="btn-danger" %}
+        {% bootstrap_button '开机' size='small' button_class="btn-primary open"%}
+        {% bootstrap_button '关机' size='small' button_class="btn-danger close" %}
     </form>
 </div>
 
@@ -28,19 +28,22 @@
     var $main = $('.main');
 
     function open_s(){
+        console.log($('#form').serialize());
+
         options={
             url: "",
             type: "post",
+            data: $('#form').serialize(),
             success: function (data) {
+                console.log(data)
                 $main.after('开机\n\n')
             }
         };
         $.ajax(options);
     }
 
-    function close_s(){
-        $main.after('开始关闭\n\n');
-{#        $main.after('已关闭\n\n');#}
-    }
+    $(function () {
+        $('.open').click(open_s);
+    })
 </script>
 </html>
