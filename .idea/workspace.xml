@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4b87a63f-31e2-47b2-ab3d-8c360a9ab82b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyDjango/settings.py" afterPath="$PROJECT_DIR$/MyDjango/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyDjango/urls.py" afterPath="$PROJECT_DIR$/MyDjango/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo_celery/templates/add_task.html" afterPath="$PROJECT_DIR$/demo_celery/templates/add_task.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo_celery/views.py" afterPath="$PROJECT_DIR$/demo_celery/views.py" />
     </list>
     <ignored path="MyDjango.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -592,7 +586,14 @@
       <option name="project" value="LOCAL" />
       <updated>1477066948251</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="把admin更换为xadmin">
+      <created>1477206561010</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1477206561010</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -633,7 +634,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="设置了网站的层级结构&#10;&#10;bootstrap3.html &gt; bootstrap.html &gt; base.html &gt; index.htnl" />
-    <option name="LAST_COMMIT_MESSAGE" value="设置了网站的层级结构&#10;&#10;bootstrap3.html &gt; bootstrap.html &gt; base.html &gt; index.htnl" />
+    <MESSAGE value="把admin更换为xadmin" />
+    <option name="LAST_COMMIT_MESSAGE" value="把admin更换为xadmin" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
