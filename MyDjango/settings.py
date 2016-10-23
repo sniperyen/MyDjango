@@ -18,10 +18,11 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     # 第三方应用
-    'xadmin',  # 后台管理 https://github.com/sshwsfc/xadmin
-    'Lib.bootstrap3',  # 样式
-    'crispy_forms',  # 模板定义  http://django-crispy-forms.readthedocs.io/en/latest/
     'djcelery',  # 定时
+    'Lib.bootstrap3',  # 样式
+    'xadmin',  # 后台管理 https://github.com/sshwsfc/xadmin
+    'crispy_forms',  # 模板定义  http://django-crispy-forms.readthedocs.io/en/latest/
+    'reversion',
     'debug_toolbar',  # 调试工具
 
     # 测试应用
