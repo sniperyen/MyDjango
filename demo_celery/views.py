@@ -25,7 +25,7 @@ class AddTask(TemplateView):
                 int_sche = int_sche[0]
             else:
                 int_sche = IntervalSchedule()
-                int_sche.every = seconds
+                int_sche.every = int(seconds)
                 int_sche.period = 'seconds'
                 int_sche.save()
 
@@ -45,6 +45,7 @@ class AddTask(TemplateView):
             # pt.crontab = cron_sche
             # pt.expires = datetime.datetime.now() + datetime.timedelta(days=1)
             pt.save()
+            return HttpResponse('添加成功')
 
         else:
             res = add.delay(2, 3)

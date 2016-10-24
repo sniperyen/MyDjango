@@ -4,5 +4,58 @@
 {% block title %}django-bootstrap3{% endblock %}
 
 {% block content %}
-    这里是django-bootstrap3的示例页面。
+    <div class="container">
+        <h1>这里是django-bootstrap3的 <abbr title="这里是缩略语的属性">示例页面</abbr> 。</h1>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-1">.col-md-1</div>
+            <div class="col-md-1">.col-md-1</div>
+            <div class="col-md-1">.col-md-1</div>
+            <div class="col-md-1">.col-md-1</div>
+            <div class="col-md-1">.col-md-1</div>
+            <div class="col-md-1">.col-md-1</div>
+            <div class="col-md-1">.col-md-1</div>
+            <div class="col-md-1">.col-md-1</div>
+            <div class="col-md-1">.col-md-1</div>
+            <div class="col-md-1">.col-md-1</div>
+            <div class="col-md-1">.col-md-1</div>
+            <div class="col-md-1">.col-md-1</div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">.col-md-8</div>
+            <div class="col-md-4">.col-md-4</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">.col-md-4</div>
+            <div class="col-md-4">.col-md-4</div>
+            <div class="col-md-4">.col-md-4</div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">.col-md-6</div>
+            <div class="col-md-6">.col-md-6</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <table class="table table-hover">
+            <!-- On rows -->
+            <tr class="active">...</tr>
+            <tr class="success">...</tr>
+            <tr class="warning">...</tr>
+            <tr class="danger">...</tr>
+            <tr class="info">...</tr>
+
+            <!-- On cells (`td` or `th`) -->
+            <tr>
+              <td class="active">...</td>
+              <td class="success">...</td>
+              <td class="warning">...</td>
+              <td class="danger">...</td>
+              <td class="info">...</td>
+            </tr>
+        </table>
+    </div>
 {% endblock %}
+

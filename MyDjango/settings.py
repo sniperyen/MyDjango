@@ -10,7 +10,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = (
     # 内置应用
-    # 'django.contrib.admin',
+    'django_admin_bootstrapped',
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -18,9 +19,9 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     # 第三方应用
+    # 'xadmin',  # 后台管理 https://github.com/sshwsfc/xadmin
     'djcelery',  # 定时
     'Lib.bootstrap3',  # 样式
-    'xadmin',  # 后台管理 https://github.com/sshwsfc/xadmin
     'crispy_forms',  # 模板定义  http://django-crispy-forms.readthedocs.io/en/latest/
     'reversion',
     'debug_toolbar',  # 调试工具
@@ -95,10 +96,13 @@ BOOTSTRAP3 = {
 
 # region Settings for celery
 import djcelery
+
 djcelery.setup_loader()
 
 BROKER_URL = 'amqp://guest:guest@127.0.0.1:5672//'
 CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
+CELERY_RESULT_BACKEND = 'djcelery.backends.database:DatabaseBackend'
+CELERY_TIMEZONE = TIME_ZONE  # 使用和Django一样的时区
 # endregion
 
 # region Settings for log
@@ -115,27 +119,28 @@ logging.basicConfig(
 # See http://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'filters': {
-         'require_debug_false': {
-             '()': 'django.utils.log.RequireDebugFalse'
-         }
-    },
-    'handlers': {
-        'mail_admins': {
-            'level': 'ERROR',
-            'filters': ['require_debug_false'],
-            'class': 'django.utils.log.AdminEmailHandler'
-        }
-    },
-    'loggers': {
-        'django.request': {
-            'handlers': ['mail_admins'],
-            'level': 'ERROR',
-            'propagate': True,
-        },
-    },
-}
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'filters': {
+#          'require_debug_false': {
+#              '()': 'django.utils.log.RequireDebugFalse'
+#          }
+#     },
+#     'handlers': {
+#         'mail_admins': {
+#             'level': 'ERROR',
+#             'filters': ['require_debug_false'],
+#             'class': 'django.utils.log.AdminEmailHandler'
+#         }
+#     },
+#     'loggers': {
+#         'django.request': {
+#             'handlers': ['mail_admins'],
+#             'level': 'ERROR',
+#             'propagate': True,
+#         },
+#     },
+# }
+
 # endregion

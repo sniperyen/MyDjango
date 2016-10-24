@@ -16,6 +16,6 @@ platforms.C_FORCE_ROOT = True
 app.config_from_object('django.conf:settings')  # 加载配置文件
 app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
 
-app.conf.update(
-    CELERY_RESULT_BACKEND='djcelery.backends.database:DatabaseBackend',
-)
+# app.conf.update(
+#     CELERY_RESULT_BACKEND='djcelery.backends.database:DatabaseBackend',
+# )
