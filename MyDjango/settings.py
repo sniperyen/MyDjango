@@ -10,7 +10,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = (
     # 内置应用
-    'django_admin_bootstrapped',
+    # 'django_admin_bootstrapped',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -19,12 +19,12 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     # 第三方应用
-    # 'xadmin',  # 后台管理 https://github.com/sshwsfc/xadmin
+    'debug_toolbar',  # 调试工具
+    'reversion',
     'djcelery',  # 定时
     'Lib.bootstrap3',  # 样式
-    'crispy_forms',  # 模板定义  http://django-crispy-forms.readthedocs.io/en/latest/
-    'reversion',
-    'debug_toolbar',  # 调试工具
+    'Lib.crispy_forms',  # 模板定义  http://django-crispy-forms.readthedocs.io/en/latest/
+    'xadmin',  # 后台管理 https://github.com/sshwsfc/xadmin
 
     # 测试应用
     'demo_bootstrap',  # bootstrap的一个示例app
