@@ -20,7 +20,9 @@ INSTALLED_APPS = (
 
     # 第三方应用
     'debug_toolbar',  # 调试工具
+    # 'django_filters',
     'reversion',
+    'rest_framework',  # 提供api  http://www.django-rest-framework.org/api-guide/
     'djcelery',  # 定时
     'Lib.bootstrap3',  # 样式
     'Lib.crispy_forms',  # 模板定义  http://django-crispy-forms.readthedocs.io/en/latest/
@@ -29,6 +31,7 @@ INSTALLED_APPS = (
     # 测试应用
     'demo_bootstrap',  # bootstrap的一个示例app
     'demo_celery',
+    'demo_restfulapi',
 
     # 公共应用
     'utils',
@@ -119,28 +122,37 @@ logging.basicConfig(
 # See http://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
 
-# LOGGING = {
-#     'version': 1,
-#     'disable_existing_loggers': False,
-#     'filters': {
-#          'require_debug_false': {
-#              '()': 'django.utils.log.RequireDebugFalse'
-#          }
-#     },
-#     'handlers': {
-#         'mail_admins': {
-#             'level': 'ERROR',
-#             'filters': ['require_debug_false'],
-#             'class': 'django.utils.log.AdminEmailHandler'
-#         }
-#     },
-#     'loggers': {
-#         'django.request': {
-#             'handlers': ['mail_admins'],
-#             'level': 'ERROR',
-#             'propagate': True,
-#         },
-#     },
-# }
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+         'require_debug_false': {
+             '()': 'django.utils.log.RequireDebugFalse'
+         }
+    },
+    'handlers': {
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler'
+        }
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    },
+}
 
 # endregion
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
+    'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',),
+    # 'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
+    'PAGINATE_BY': 10,
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 2
+}

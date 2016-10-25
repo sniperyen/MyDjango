@@ -2,6 +2,7 @@
 from django.conf.urls import patterns, include, url
 from django.views.generic import TemplateView
 from django.conf import settings
+from demo_restfulapi.urls import router
 
 # from django.contrib import admin
 # admin.autodiscover()
@@ -25,4 +26,8 @@ urlpatterns = patterns(
     url(r'^demo_celery/', include('demo_celery.urls'), name='demo_celery'),  # 定时任务
     url(r'^demo_bootstrap/', include('demo_bootstrap.urls'), name='demo_bootstrap'),  # 基于bootstrap的测试app
     url(r'^setlang/$', 'django.views.i18n.set_language', name='setlang'),  # 全局语言设置
+
+    # restfulapi
+    url(r'^api/', include(router.urls)),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 )
