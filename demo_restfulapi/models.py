@@ -6,6 +6,8 @@ class User(models.Model):
     name = models.CharField(max_length=32)
     mail = models.EmailField()
 
+    class Meta:
+        db_table = 'user'
 
 class Article(models.Model):
     STATUS_SET = (
@@ -18,3 +20,6 @@ class Article(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     status = models.IntegerField(choices=STATUS_SET, default=0)
     author = models.ForeignKey(User, related_name='entries')
+
+    class Meta:
+        db_table = 'article'

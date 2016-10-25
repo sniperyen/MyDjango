@@ -4,4 +4,4 @@ from demo_restfulapi import views
 
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
-router.register(r'groups', views.ArticleViewSet)
+router.register(r'articles', views.ArticleViewSet)
