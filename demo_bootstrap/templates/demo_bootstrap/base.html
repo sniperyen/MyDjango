@@ -50,6 +50,7 @@ body { padding-top: 70px; }
 
           <ul class="nav navbar-nav navbar-right">
             <li><a href="{% url 'icons' %}">icons</a></li>
+              <li><a href="#">Messages <span class="badge">3</span></a> </li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">wangsy <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
@@ -64,8 +65,6 @@ body { padding-top: 70px; }
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
-
-
 
     {% autoescape off %}{% bootstrap_messages %}{% endautoescape %}
 
