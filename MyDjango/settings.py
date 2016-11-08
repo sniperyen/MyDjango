@@ -32,6 +32,7 @@ INSTALLED_APPS = (
     'demo_bootstrap',  # bootstrap的一个示例app
     'demo_celery',
     'demo_restfulapi',
+    'ace',
 
     # 公共应用
     'utils',
@@ -81,9 +82,11 @@ STATICFILES_DIRS = (
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),
 )
-TEMPLATE_CONTEXT_PROCESSORS = ('django.core.context_processors.i18n',
-                               'django.contrib.auth.context_processors.auth',
-                               )
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+)
+
 # endregion
 
 # region Settings for django-bootstrap3
@@ -126,9 +129,9 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'filters': {
-         'require_debug_false': {
-             '()': 'django.utils.log.RequireDebugFalse'
-         }
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
     },
     'handlers': {
         'mail_admins': {
@@ -155,4 +158,8 @@ REST_FRAMEWORK = {
     'PAGINATE_BY': 10,
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 2
+}
+
+XADMIN_CONF = {
+
 }

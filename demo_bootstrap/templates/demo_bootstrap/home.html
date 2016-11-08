@@ -57,12 +57,28 @@
                     </div>
                 </div>
             </div>
-            <div role="tabpanel" class="tab-pane fade" id="profile">...</div>
+            <div role="tabpanel" class="tab-pane fade" id="profile">
+                <a id="tooltip" href="#" data-toggle="tooltip" title="first tooltip">Hover over me</a>
+                <div class="tooltip">
+                  <div class="tooltip-inner">
+                    Tooltip!
+                  </div>
+                  <div class="tooltip-arrow"></div>
+                </div>
+
+
+            </div>
             <div role="tabpanel" class="tab-pane fade" id="messages">...</div>
             <div role="tabpanel" class="tab-pane fade" id="settings">...</div>
         </div>
 
 
+
     </div>
+    <script>
+        $(function(){
+            $('#tooltip').tooltip('show');
+        })
+    </script>
 {% endblock %}
 
