@@ -216,7 +216,7 @@
                         </li>
 
                         <li>
-                            <a href="inbox.html">
+                            <a href="../ace/templates/ace/inbox.html">
                                 查看所有消息
                                 <i class="icon-arrow-right"></i>
                             </a>
@@ -229,7 +229,7 @@
                         <img class="nav-user-photo" src="/static/assets/avatars/user.jpg" alt="Jason's Photo" />
                         <span class="user-info">
                             <small>欢迎光临,</small>
-                            Jason
+                            {{ request.user.username }}
                         </span>
 
                         <i class="icon-caret-down"></i>
@@ -253,7 +253,7 @@
                         <li class="divider"></li>
 
                         <li>
-                            <a href="#">
+                            <a href="/customer/logout">
                                 <i class="icon-off"></i>
                                 退出
                             </a>

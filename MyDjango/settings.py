@@ -8,6 +8,9 @@ DEBUG = True
 TEMPLATE_DEBUG = True
 ALLOWED_HOSTS = []
 
+LOGOUT_URL = "/customer/logout/"
+LOGIN_URL = "/customer/login/"
+
 INSTALLED_APPS = (
     # 内置应用
     # 'django_admin_bootstrapped',
@@ -25,7 +28,7 @@ INSTALLED_APPS = (
     'rest_framework',  # 提供api  http://www.django-rest-framework.org/api-guide/
     'djcelery',  # 定时
     'Lib.bootstrap3',  # 样式
-    'Lib.crispy_forms',  # 模板定义  http://django-crispy-forms.readthedocs.io/en/latest/
+    'crispy_forms',  # 模板定义  http://django-crispy-forms.readthedocs.io/en/latest/
     'xadmin',  # 后台管理 https://github.com/sshwsfc/xadmin
 
     # 测试应用
@@ -33,6 +36,7 @@ INSTALLED_APPS = (
     'demo_celery',
     'demo_restfulapi',
     'ace',
+    'customer',
 
     # 公共应用
     'utils',
