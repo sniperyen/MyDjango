@@ -6,5 +6,6 @@ from views import *
 urlpatterns=patterns(
     "",
     url(r"^$", HomePageView.as_view(), name="index"),
+    url(r"^domain$", DomainView.as_view(), name="domain"),
 )
 
