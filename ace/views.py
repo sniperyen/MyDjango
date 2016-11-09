@@ -22,7 +22,7 @@ class HomePageView(TemplateViewBase):
         return context
 
 
-class DomainView(TemplateView):
+class DomainView(TemplateViewBase):
     template_name = 'ace/domain_list.html'
 
     def get_context_data(self, **kwargs):

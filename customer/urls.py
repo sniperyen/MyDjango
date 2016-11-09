@@ -7,5 +7,7 @@ urlpatterns=patterns(
     "",
     url(r"^login/", login, name="login"),
     url(r"^logout/", logout, name="logout"),
+    url(r"^forget_pwd/", forget_pwd, name="forget_pwd"),
+    url(r"^register/", register, name="register"),
 )
 

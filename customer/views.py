@@ -30,7 +30,7 @@ def login(request):
             user = auth.authenticate(username=username, password=password)
             if user and user.is_active:
                 auth.login(request, user)
-                return RedirectView.as_view(url="/")(request)
+                return HttpResponseRedirect(next)
             else:
                 form.errors['msg'] = '用户名或密码不正确'
     else:
@@ -44,3 +44,13 @@ def logout(request):
     auth.logout(request)
     next = reverse('customer:login')
     return HttpResponseRedirect(next)
+
+
+def register(request):
+    if request.method == 'POST':
+        pass
+
+
+def forget_pwd(request):
+    if request.method == 'POST':
+        pass
