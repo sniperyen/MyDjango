@@ -23,12 +23,12 @@ urlpatterns = patterns(
     # url(r'^admin/', include(admin.site.urls)),  # 后台管理模块
 
     url(r'^$', HomePageView.as_view(), name="index"),
-    url(r'^customer/', include('customer.urls'), name="customer"),
-    url(r'^ace/', include('ace.urls'), name="ace"),
-    url(r'^demo_celery/', include('demo_celery.urls'), name='demo_celery'),  # 定时任务
-    url(r'^demo_bootstrap/', include('demo_bootstrap.urls'), name='demo_bootstrap'),  # 基于bootstrap的测试app
+    url(r'^customer/', include('customer.urls', namespace="customer")),
+    url(r'^ace/', include('ace.urls', namespace="ace")),
+    url(r'^demo_celery/', include('demo_celery.urls', namespace="demo_celery")),  # 定时任务
+    url(r'^demo_bootstrap/', include('demo_bootstrap.urls', namespace="demo_bootstrap")),  # 基于bootstrap的测试app
 
     # restfulapi
-    url(r'^api/', include(router.urls)),
+    url(r'^api/', include(router.urls, namespace="customer")),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 )

@@ -42,4 +42,5 @@ def login(request):
 
 def logout(request):
     auth.logout(request)
-    return HttpResponseRedirect(url=reverse('customer:login'))
+    next = reverse('customer:login')
+    return HttpResponseRedirect(next)

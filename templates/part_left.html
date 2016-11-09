@@ -35,7 +35,7 @@
 
     <ul class="nav nav-list">
         <li class="active">
-            <a href="../ace/templates/ace/index.html">
+            <a href="{% url 'index' %}">
                 <i class="icon-dashboard"></i>
                 <span class="menu-text"> 控制台 </span>
             </a>
@@ -147,7 +147,7 @@
 
             <ul class="submenu">
                 <li>
-                    <a href="{% url 'domain' %}">
+                    <a href="{% url 'ace:domain' %}">
                         <i class="icon-double-angle-right"></i>
                         域名设置
                     </a>
