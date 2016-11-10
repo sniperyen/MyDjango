@@ -159,18 +159,18 @@
 												请输入您的验证邮箱并查看：
 											</p>
 
-											<form>
+											<form id="forgot_form" method="post" action="{% url 'customer:forgot_pwd' %}">
                                                 {% csrf_token %}
 												<fieldset>
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="email" class="form-control" placeholder="邮箱" />
+															<input name="email" id="forgot_email" type="email" class="form-control" placeholder="邮箱" />
 															<i class="icon-envelope"></i>
 														</span>
 													</label>
 
 													<div class="clearfix">
-														<button type="button" class="width-35 pull-right btn btn-sm btn-danger">
+														<button id="send_email" type="submit" class="width-35 pull-right btn btn-sm btn-danger">
 															<i class="icon-lightbulb"></i>
 															发送!
 														</button>
@@ -310,11 +310,11 @@
                  jQuery('#'+id).addClass('visible');
 			}
 
-			// 检查邮箱或用户名在服务器是否已经被用
-			function check_reg_info(_name, selecter) {
+			// 检查邮箱或用户名在服务器是可用或不可用
+			function check_reg_info(_name, selecter, check_exists){
                 return {
                     type: "post",
-                    url: "{% url 'customer:check_reg_info' %}",
+                    url: "{% url 'customer:is_exists' %}",
                     dataType: "html",
                     data: {
                         'csrfmiddlewaretoken': $("input[name=csrfmiddlewaretoken]").val(),
@@ -324,7 +324,7 @@
                         }
                     },
                     dataFilter: function(data, type) {
-                        return data == "true";
+                        return data == check_exists;  // 相等时，不触发错误事件
                     }
                 }
             }
@@ -335,13 +335,13 @@
                     rules: {
                         email: {
                             required: true,
-                            remote: check_reg_info('email', '#reg_email')
+                            remote: check_reg_info('email', '#reg_email', 'false')
                         },
                         username: {
                             required: true,
                             minlength: 3,
                             maxlength: 16,
-                            remote: check_reg_info('username', '#reg_username')
+                            remote: check_reg_info('username', '#reg_username', 'false')
                         },
                         password: {
                             required: true,
@@ -373,7 +373,7 @@
                         }
                     },
                     submitHandler:function(form){
-                        alert("提交事件!");
+                        // alert("提交事件!");
                         form.submit();
                         // $(form).ajaxSubmit();
                     },
@@ -392,7 +392,32 @@
 
                 $('#reset').on('click', function () {
                     v.resetForm();
-                })
+                });
+
+                $('#forgot_form').validate({
+                    rules: {
+                        email: {
+                            required: true,
+                            remote: check_reg_info('email', '#forgot_email', 'true')
+                        }
+                    },
+                    submitHandler:function(form){
+                        // alert("提交事件!");
+{#                        form.submit();#}
+                        $.post("{% url 'customer:forgot_pwd' %}", $(form).serialize(), function(data){
+                            alert('邮件已发送，请登录邮箱去重置密码');
+                            console.log(data);
+                            show_box("login-box");
+                        }, "json");
+                    },
+                    errorElement: "em",
+                    messages: {
+                        email: {
+                            remote: "邮箱未注册"
+                        }
+                    }
+                });
+
             });
 
 		</script>

@@ -8,6 +8,7 @@ from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
+from django.http import JsonResponse
 from django.shortcuts import render_to_response
 from django.views.generic import RedirectView
 from django.views.generic import TemplateView
@@ -57,7 +58,7 @@ def logout(request):
     return HttpResponseRedirect(next)
 
 
-def check_reg_info(request):
+def is_exists(request):
     if request.method == 'POST':
         name = request.POST.get('name')
         value = request.POST.get('value')
@@ -67,7 +68,7 @@ def check_reg_info(request):
             user = User.objects.filter(email=value)
         else:
             user = None
-        res = 'false' if user else 'true'
+        res = 'true' if user else 'false'
         return HttpResponse(res)
 
 
@@ -97,9 +98,10 @@ def register(request):
     return render_to_response('customer/login.html', {'form': form, 'error': error})
 
 
-def forget_pwd(request):
+def forgot_pwd(request):  # todo 根据用户id，发送一份邮件
     if request.method == 'POST':
-        pass
+        email = request.POST.get('email')
+        return JsonResponse({'code': 0, 'message': email})
 
 
 def changepassword(request, username):
