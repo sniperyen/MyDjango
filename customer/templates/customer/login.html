@@ -27,7 +27,14 @@
 		<![endif]-->
 
 		<!-- inline styles related to this page -->
-
+        <style>
+            em.error {
+              background:url("/static/image/unchecked.gif") no-repeat 0px 0px;
+              padding-left: 16px;
+              color: black;
+              font-size: small;
+            }
+        </style>
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
 		<!--[if lt IE 9]>
@@ -190,42 +197,43 @@
 											</h4>
 
 											<div class="space-6"></div>
-											<p> 请输入您的详细信息 </p>
+											<p id="reg_errors"> 请输入您的详细信息 </p>
 
-											<form>
+											<form id="registerForm" method="post" action="{% url 'customer:register' %}">
                                                 {% csrf_token %}
 												<fieldset>
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="email" class="form-control" placeholder="邮箱" />
+															<input name="email" id="reg_email" type="email" class="form-control" placeholder="邮箱"
+                                                                   required />
 															<i class="icon-envelope"></i>
 														</span>
 													</label>
 
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="text" class="form-control" placeholder="用户名" />
+															<input name="username" id="reg_username" type="text" class="form-control" placeholder="用户名" />
 															<i class="icon-user"></i>
 														</span>
 													</label>
 
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="密码" />
+															<input name="password" id="reg_password" type="password" class="form-control password" placeholder="密码" />
 															<i class="icon-lock"></i>
 														</span>
 													</label>
 
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="重复密码" />
+															<input name="password1" id="reg_password1" type="password" class="form-control" placeholder="重复密码" />
 															<i class="icon-retweet"></i>
 														</span>
 													</label>
 
 													<label class="block">
-														<input type="checkbox" class="ace" />
-														<span class="lbl">
+                                                        <input name="agree" id="reg_agree" type="checkbox" class="ace" checked />
+                                                        <span class="lbl">
 															我已阅读并同意
 															<a href="#">用户协议</a>
 														</span>
@@ -234,12 +242,12 @@
 													<div class="space-24"></div>
 
 													<div class="clearfix">
-														<button type="reset" class="width-30 pull-left btn btn-sm">
+														<button type="button" id="reset" class="width-30 pull-left btn btn-sm">
 															<i class="icon-refresh"></i>
 															重置
 														</button>
 
-														<button type="button" class="width-65 pull-right btn btn-sm btn-success">
+														<button type="submit" id="register" class="width-65 pull-right btn btn-sm btn-success">
 															注册
 															<i class="icon-arrow-right icon-on-right"></i>
 														</button>
@@ -268,7 +276,9 @@
 		<!--[if !IE]> -->
 
 		<script src="/static/assets/js/jquery-2.0.3.min.js"></script>
-
+		<script src="/static/assets/js/jquery.validate.min.js"></script>
+		<script src="/static/assets/js/additional-methods.min.js"></script>
+        <script src="/static/assets/js/messages_zh.js"></script>
 		<!-- <![endif]-->
 
 		<!--[if IE]>
@@ -294,12 +304,97 @@
 		</script>
 
 		<!-- inline scripts related to this page -->
-
 		<script type="text/javascript">
 			function show_box(id) {
-			 jQuery('.widget-box.visible').removeClass('visible');
-			 jQuery('#'+id).addClass('visible');
+                 jQuery('.widget-box.visible').removeClass('visible');
+                 jQuery('#'+id).addClass('visible');
 			}
+
+			// 检查邮箱或用户名在服务器是否已经被用
+			function check_reg_info(_name, selecter) {
+                return {
+                    type: "post",
+                    url: "{% url 'customer:check_reg_info' %}",
+                    dataType: "html",
+                    data: {
+                        'csrfmiddlewaretoken': $("input[name=csrfmiddlewaretoken]").val(),
+                        name: _name,
+                        value: function() {
+                            return $(selecter).val();  // 这里必须用return来返回值，不然取不到值
+                        }
+                    },
+                    dataFilter: function(data, type) {
+                        return data == "true";
+                    }
+                }
+            }
+
+			$(function () {
+                // 参考 http://www.cnblogs.com/si-shaohua/p/3780321.html
+                var v = $("#registerForm").validate({
+                    rules: {
+                        email: {
+                            required: true,
+                            remote: check_reg_info('email', '#reg_email')
+                        },
+                        username: {
+                            required: true,
+                            minlength: 3,
+                            maxlength: 16,
+                            remote: check_reg_info('username', '#reg_username')
+                        },
+                        password: {
+                            required: true,
+                            minlength: 3,
+                            maxlength: 16
+                        },
+                        password1: {
+                          equalTo: "#reg_password"
+                        },
+                        agree: {
+                            required: true
+                        }
+                    },
+                    messages: {
+                        email: {
+                            remote: "邮箱已注册"
+                        },
+                        username: {
+                            required: "请输入用户名，3-16个字符（字母、数字、下划线），注册后不能更改",
+                            minlength: "用户名长度不能小于3个字符",
+                            maxlength: "用户名长度不能大于16个字符",
+                            remote: "用户名已注册"
+                        },
+                        password1: {
+                            equalTo: "请输入相同的密码"
+                        },
+                        agree: {
+                            required: "这是必选项"
+                        }
+                    },
+                    submitHandler:function(form){
+                        alert("提交事件!");
+                        form.submit();
+                        // $(form).ajaxSubmit();
+                    },
+                    errorElement: "em",
+                    errorPlacement: function(error, element) {
+                        console.log(error);
+                        console.log(element);
+                        if (element.is(":radio") )
+                            error.appendTo( element.parent().next().next() );
+                        else if ( element.is(":checkbox") )
+                            error.appendTo ( element.next() );
+                        else
+                            error.insertAfter(element);
+                    }
+                });
+
+                $('#reset').on('click', function () {
+                    v.resetForm();
+                })
+            });
+
 		</script>
 </body>
 </html>
