@@ -25,7 +25,7 @@ class Profile(object):
 
 
 class MyProfile(Profile):
-    nickname = models.CharField(max_length=255)
+    nickname = models.CharField(max_length=255, blank=True)
     birthday = models.DateTimeField(null=True, blank=True)
     city = models.CharField(max_length=30, blank=True)
     university = models.CharField(max_length=255, blank=True)
