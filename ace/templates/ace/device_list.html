@@ -1,0 +1,27 @@
+{% extends "base_list.html" %}
+
+{% block description %}
+    其它资源都必须添加到相应的节点上，所以节点起码要有一个
+{% endblock %}
+
+{% block table_th %}
+<th>设备名称</th>  
+<th>主机名称</th>  
+<th>管理地址</th>  
+<th>使用部门</th>  
+<th>设备型号</th>  
+<th>设备序列号</th>  
+<th>登记人</th>  
+
+{% endblock %}
+
+{% block table_td %}  
+<td>{{object.device_caption}}</td>  
+<td>{{object.device_sysname}}</td>  
+<td>{{object.device_ip}}</td>  
+<td>{{object.node}}</td>  
+<td>{{object.device_type}}</td>  
+<td>{{object.device_serial}}</td>  
+<td>{{object.signer}}</td>  
+  
+{% endblock %}  

@@ -94,6 +94,8 @@ TEMPLATE_LOADERS = (
 # endregion
 
 # region Settings for django-bootstrap3
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 BOOTSTRAP3 = {
     'set_required': False,
     'error_css_class': 'bootstrap3-error',
@@ -154,6 +156,18 @@ LOGGING = {
 }
 
 # endregion
+
+# region Settings for email
+# 用法： http://www.ziqiangxuetang.com/django/django-send-email.html
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = False
+EMAIL_HOST = 'smtp.tuweizhong.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'mail@tuweizhong.com'
+EMAIL_HOST_PASSWORD = 'xxxx'
+DEFAULT_FROM_EMAIL = 'tuweizhong <tuweizhong@163.com>'
+# endregion
+
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),

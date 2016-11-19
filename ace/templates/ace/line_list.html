@@ -1,0 +1,29 @@
+{% extends "base_list.html" %}
+
+{% block description %}
+    其它资源都必须添加到相应的节点上，所以节点起码要有一个
+{% endblock %}
+
+{% block table_th %}
+    <th>线路编号</th>  
+   <th>用户名称</th>  
+   <th>本端地址</th>  
+   <th>对端地址</th>  
+   <th>运营商</th>  
+   <th>线路类型</th>  
+   <th>线路速率</th>  
+   <th>线路参数</th>  
+   <th>所在总头</th>  
+  
+{% endblock %}  
+{% block table_td %}  
+    <td>{{object.line_code}}</td>  
+   <td>{{object.node}}</td>  
+   <td>{{object.line_para1}}</td>  
+   <td>{{object.line_para2}}</td>  
+   <td>{{object.line_local}}</td>  
+   <td>{{object.line_speed}}</td>  
+   <td>{{object.line_speed}}</td>  
+   <td>{{object.para2}}</td>  
+   <td>{{object.para2}}</td>  
+{% endblock %}  

@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+<!-- datatables的用法： http://datatables.club/ -->
+
+{% block plugin_scripts %}
+    <script src="/static/assets/js/jquery.dataTables.min.js"></script>
+    <script src="/static/assets/js/jquery.dataTables.bootstrap.js"></script>
+{% endblock %}
+
+
+{% block content %}
+    <div class="row">
+        <!-- Search Page BEGINS-->
+        <div class="col-xs-12">
+            <form class="navbar-for navbar-container" role="search" method="get" action="">{% csrf_token %}
+                <!--放置搜索栏内容-->
+                {% block search_data %}
+                {% endblock %}
+{#                <div class="col-sm-3">#}
+{#                    <span class="input-group-btn">#}
+{#                       <button type="submit" class="btn btn-purple btn-sm">#}
+{#                            查询#}
+{#                            <i class="ace-icon fa fa-search icon-on-right bigger-110"></i>#}
+{#                        </button>#}
+{#                    </span>#}
+{#                </div>#}
+            </form>
+        </div>
+        <!-- Search Page END -->
+
+        <div class="col-xs-12">
+            <div class="table-responsive">
+                <table id="sample-table-2" class="table table-striped table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th class="center">
+                            <label>
+                                <input type="checkbox" class="ace"/>
+                                <span class="lbl"></span>
+                            </label>
+                        </th>
+                        {% block table_th %}
+
+                        {% endblock %}
+                        <th></th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for object in object_list %}
+                        <tr>
+                            <td class="center">
+                                <label>
+                                    <input type="checkbox" class="ace"/>
+                                    <span class="lbl"></span>
+                                </label>
+                            </td>
+
+                            {% block table_td %}
+
+                            {% endblock %}
+
+                            <td>
+                                <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+                                    <a class="blue" href="{% url 'add' table=table %}">
+                                        <i class="icon-zoom-in bigger-130"></i>
+                                    </a>
+
+                                    <a class="green" href="{% url 'edit' table object.id %}">
+                                        <i class="icon-pencil bigger-130"></i>
+                                    </a>
+
+                                    <a class="red" href="{% url 'delete' table object.id %}">
+                                        <i class="icon-trash bigger-130"></i>
+                                    </a>
+                                </div>
+
+                                <div class="visible-xs visible-sm hidden-md hidden-lg">
+                                    <div class="inline position-relative">
+                                        <button class="btn btn-minier btn-yellow dropdown-toggle"
+                                                data-toggle="dropdown">
+                                            <i class="icon-caret-down icon-only bigger-120"></i>
+                                        </button>
+
+                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                            <li>
+                                                <a href="" class="tooltip-info" data-rel="tooltip" title="详情">
+                                                    <span class="blue">
+                                                        <i class="icon-zoom-in bigger-120"></i>
+                                                    </span>
+                                                </a>
+                                            </li>
+
+                                            <li>
+                                                <a href="" class="tooltip-success" data-rel="tooltip" title="编辑">
+                                                    <span class="green">
+                                                        <i class="icon-edit bigger-120"></i>
+                                                    </span>
+                                                </a>
+                                            </li>
+
+                                            <li>
+                                                <a href="" class="tooltip-error" data-rel="tooltip" title="删除">
+                                                    <span class="red">
+                                                        <i class="icon-trash bigger-120"></i>
+                                                    </span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+    </div>
+{% endblock %}
+
+
+{% block inline_scripts %}
+
+    <script type="text/javascript">
+        jQuery(function ($) {
+            var oTable1 = $('#sample-table-2').dataTable({
+                "oLanguage": {
+                        "sLengthMenu": "每页显示 _MENU_ 条记录",
+                        "sInfo": "从 _START_ 到 _END_ /共 _TOTAL_ 条数据",
+                        "sInfoEmpty": "",
+                        "sInfoFiltered": "(从 _MAX_ 条数据中检索)",
+                        "oPaginate": {
+                        "sFirst": "首页",
+                        "sPrevious": "前一页",
+                        "sNext": "后一页",
+                        "sLast": "尾页",
+                    },
+                    "sZeroRecords": "没有检索到数据",
+                    "sProcessing": "<img src='./loading.gif' />"
+                },
+                "columnDefs": [{  //列配置
+                    //只有最后一行不需要排序
+                    "orderable": false,
+                    "targets": -1
+                }],
+{#                "aoColumns": [#}
+{#                    {"bSortable": false},#}
+{#                    null, null, null, null, null,#}
+{#                    {"bSortable": false}#}
+{#                ]#}
+            });
+
+
+            $('table th input:checkbox').on('click', function () {
+                var that = this;
+                $(this).closest('table').find('tr > td:first-child input:checkbox')
+                        .each(function () {
+                            this.checked = that.checked;
+                            $(this).closest('tr').toggleClass('selected');
+                        });
+
+            });
+
+
+            $('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
+            function tooltip_placement(context, source) {
+                var $source = $(source);
+                var $parent = $source.closest('table')
+                var off1 = $parent.offset();
+                var w1 = $parent.width();
+
+                var off2 = $source.offset();
+                var w2 = $source.width();
+
+                if (parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2)) return 'right';
+                return 'left';
+            }
+        })
+    </script>
+
+{% endblock %}

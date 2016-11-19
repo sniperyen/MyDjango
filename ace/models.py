@@ -1,10 +1,6 @@
-# -*- coding: UTF-8 -*-
-# 迁移时，能使python2的语法运用在python3上
-from __future__ import unicode_literals
+# coding=utf-8
 from django.db import models
 
-
-# Create your models here.
 
 class Node(models.Model):
     type = (
@@ -70,8 +66,6 @@ class Line(models.Model):
 
     def __unicode__(self):
         return self.line_code
-
-        # 建立设备信息表
 
 
 class Device(models.Model):

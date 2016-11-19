@@ -1,0 +1,27 @@
+{% extends "base_list.html" %}
+
+{% block description %}
+    其它资源都必须添加到相应的节点上，所以节点起码要有一个
+{% endblock %}
+
+
+{% block table_th %}
+
+<th>机构名称</th>  
+<th>机构分类</th>  
+<th>成本中心</th>  
+<th>机构地址</th>  
+<th>联系人</th>
+
+{% endblock %}
+
+
+{% block table_td %}
+
+<td>{{object.node_name}}</td>
+<td>{{object.node_type}}</td>
+<td>{{object.node_cost}}</td>
+<td>{{object.node_address}}</td>
+<td>{{object.node_contact}}</td>
+  
+{% endblock %}  

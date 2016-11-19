@@ -42,7 +42,7 @@
         </li>
 
         <li>
-            <a href="../ace/templates/ace/typography.html">
+            <a href="../ace/templates/ace/examples/typography.html">
                 <i class="icon-text-width"></i>
                 <span class="menu-text"> 首页总览 </span>
             </a>
@@ -55,86 +55,30 @@
 
                 <b class="arrow icon-angle-down"></b>
             </a>
-
             <ul class="submenu">
-                <li >
-                    <a href="../ace/templates/ace/elements.html">
-                        <i class="icon-double-angle-right"></i>
-                        组件
-                    </a>
-                </li>
-
-                <li>
-                    <a href="../ace/templates/ace/buttons.html">
-                        <i class="icon-double-angle-right"></i>
-                        按钮 &amp; 图表
-                    </a>
-                </li>
-
-                <li>
-                    <a href="../ace/templates/ace/treeview.html">
-                        <i class="icon-double-angle-right"></i>
-                        树菜单
-                    </a>
-                </li>
-
-                <li>
-                    <a href="../ace/templates/ace/jquery-ui.html">
-                        <i class="icon-double-angle-right"></i>
-                        jQuery UI
-                    </a>
-                </li>
-
-                <li>
-                    <a href="../ace/templates/ace/nestable-list.html">
-                        <i class="icon-double-angle-right"></i>
-                        可拖拽列表
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#" class="dropdown-toggle">
-                        <i class="icon-double-angle-right"></i>
-
-                        三级菜单
-                        <b class="arrow icon-angle-down"></b>
-                    </a>
-
-                    <ul class="submenu">
-                        <li>
-                            <a href="#">
-                                <i class="icon-leaf"></i>
-                                第一级
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#" class="dropdown-toggle">
-                                <i class="icon-pencil"></i>
-
-                                第四级
-                                <b class="arrow icon-angle-down"></b>
-                            </a>
-
-                            <ul class="submenu">
-                                <li>
-                                    <a href="#">
-                                        <i class="icon-plus"></i>
-                                        添加产品
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#">
-                                        <i class="icon-eye-open"></i>
-                                        查看商品
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
+               <li class="">
+                  <a href="{% url 'lists' table='node' %}">
+                     <i class="menu-icon fa fa-caret-right"></i>
+                     节点管理
+                  </a>
+                  <b class="arrow"></b>
+               </li>
+               <li class="">
+                  <a href="{% url 'lists' table='line' %}">
+                     <i class="menu-icon fa fa-caret-right"></i>
+                     线路管理
+                  </a>
+                  <b class="arrow"></b>
+               </li>
+              <li class="">
+                  <a href="{% url 'lists' table='device' %}">
+                     <i class="menu-icon fa fa-caret-right"></i>
+                     设备管理
+                  </a>
+                  <b class="arrow"></b>
+               </li>
             </ul>
+
         </li>
 
         <li class="active">
@@ -154,28 +98,28 @@
                 </li>
 
                 <li>
-                    <a href="../ace/templates/ace/jqgrid.html">
+                    <a href="../ace/templates/ace/examples/jqgrid.html">
                         <i class="icon-double-angle-right"></i>
                         添加线路分组
                     </a>
                 </li>
 
                 <li>
-                    <a href="../ace/templates/ace/jqgrid.html">
+                    <a href="../ace/templates/ace/examples/jqgrid.html">
                         <i class="icon-double-angle-right"></i>
                         解析量统计
                     </a>
                 </li>
 
                 <li>
-                    <a href="../ace/templates/ace/jqgrid.html">
+                    <a href="../ace/templates/ace/examples/jqgrid.html">
                         <i class="icon-double-angle-right"></i>
                         调度管理
                     </a>
                 </li>
 
                 <li>
-                    <a href="../ace/templates/ace/jqgrid.html">
+                    <a href="../ace/templates/ace/examples/jqgrid.html">
                         <i class="icon-double-angle-right"></i>
                         记录管理
                     </a>
@@ -194,28 +138,28 @@
 
             <ul class="submenu">
                 <li>
-                    <a href="../ace/templates/ace/form-elements.html">
+                    <a href="../ace/templates/ace/examples/form-elements.html">
                         <i class="icon-double-angle-right"></i>
                         表单组件
                     </a>
                 </li>
 
                 <li>
-                    <a href="../ace/templates/ace/form-wizard.html">
+                    <a href="../ace/templates/ace/examples/form-wizard.html">
                         <i class="icon-double-angle-right"></i>
                         向导提示 &amp; 验证
                     </a>
                 </li>
 
                 <li>
-                    <a href="../ace/templates/ace/wysiwyg.html">
+                    <a href="../ace/templates/ace/examples/wysiwyg.html">
                         <i class="icon-double-angle-right"></i>
                         编辑器
                     </a>
                 </li>
 
                 <li>
-                    <a href="../ace/templates/ace/dropzone.html">
+                    <a href="../ace/templates/ace/examples/dropzone.html">
                         <i class="icon-double-angle-right"></i>
                         文件上传
                     </a>
@@ -224,14 +168,14 @@
         </li>
 
         <li>
-            <a href="../ace/templates/ace/widgets.html">
+            <a href="../ace/templates/ace/examples/widgets.html">
                 <i class="icon-list-alt"></i>
                 <span class="menu-text"> 大数据 </span>
             </a>
         </li>
 
         <li>
-            <a href="../ace/templates/ace/calendar.html">
+            <a href="../ace/templates/ace/examples/calendar.html">
                 <i class="icon-calendar"></i>
 
                 <span class="menu-text">
@@ -244,14 +188,14 @@
         </li>
 
         <li>
-            <a href="../ace/templates/ace/gallery.html">
+            <a href="../ace/templates/ace/examples/gallery.html">
                 <i class="icon-picture"></i>
                 <span class="menu-text"> 域名劫持监控 </span>
             </a>
         </li>
 
         <li>
-            <a href="../ace/templates/ace/gallery.html">
+            <a href="../ace/templates/ace/examples/gallery.html">
                 <i class="icon-picture"></i>
                 <span class="menu-text"> 帮助信息 </span>
             </a>
@@ -271,35 +215,35 @@
 
             <ul class="submenu">
                 <li>
-                    <a href="../ace/templates/ace/faq.html">
+                    <a href="../ace/templates/ace/examples/faq.html">
                         <i class="icon-double-angle-right"></i>
                         帮助
                     </a>
                 </li>
 
                 <li>
-                    <a href="../ace/templates/ace/error-404.html">
+                    <a href="../ace/templates/ace/examples/error-404.html">
                         <i class="icon-double-angle-right"></i>
                         404错误页面
                     </a>
                 </li>
 
                 <li>
-                    <a href="../ace/templates/ace/error-500.html">
+                    <a href="../ace/templates/ace/examples/error-500.html">
                         <i class="icon-double-angle-right"></i>
                         500错误页面
                     </a>
                 </li>
 
                 <li>
-                    <a href="../ace/templates/ace/grid.html">
+                    <a href="../ace/templates/ace/examples/grid.html">
                         <i class="icon-double-angle-right"></i>
                         网格
                     </a>
                 </li>
 
                 <li>
-                    <a href="../ace/templates/ace/blank.html">
+                    <a href="../ace/templates/ace/examples/blank.html">
                         <i class="icon-double-angle-right"></i>
                         空白页面
                     </a>

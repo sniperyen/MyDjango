@@ -2,7 +2,7 @@
 from django.conf.urls import patterns, include, url
 from django.conf import settings
 
-from ace.views import HomePageView
+from ace.views import HomePageView, lists, add, edit, delete
 from demo_restfulapi.urls import router
 
 from django.contrib import admin
@@ -30,5 +30,10 @@ urlpatterns = patterns(
 
     # restfulapi
     url(r'^api/', include(router.urls, namespace="customer")),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+
+    url(r"^lists/(?P<table>\w+)/$", lists, name="lists"),
+    url(r"^add(?P<table>\w+)/$", add, name="add"),
+    url(r'^edit/(?P<table>\w+)/(?P<pk>\d+)/$', edit, name='edit'),
+    url(r'^delete/(?P<table>\w+)/(?P<pk>\d+)/$', delete, name='delete'),
 )
