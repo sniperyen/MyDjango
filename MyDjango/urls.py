@@ -2,6 +2,7 @@
 from django.conf.urls import patterns, include, url
 from django.conf import settings
 
+from ace.views_datatable import ProxyListJson
 from ace.views import HomePageView, lists, add, edit, delete
 from demo_restfulapi.urls import router
 
@@ -36,4 +37,6 @@ urlpatterns = patterns(
     url(r"^add(?P<table>\w+)/$", add, name="add"),
     url(r'^edit/(?P<table>\w+)/(?P<pk>\d+)/$', edit, name='edit'),
     url(r'^delete/(?P<table>\w+)/(?P<pk>\d+)/$', delete, name='delete'),
+
+    url(r'^paging_proxy/$', ProxyListJson.as_view(), name='proxy_list_json'),
 )

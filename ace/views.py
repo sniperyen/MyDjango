@@ -14,11 +14,12 @@ from ace.forms import NodeForm, DeviceForm
 from ace.models import Node, Line, Device
 from utils.util_web import TemplateViewBase, ListViewBase
 
+
 __author__ = 'sanyang'
 
 
 class HomePageView(TemplateViewBase):
-    template_name = 'ace/examples/index.html'
+    template_name = 'ace/index.html'
 
     def get_context_data(self, **kwargs):
         context = super(HomePageView, self).get_context_data(**kwargs)
