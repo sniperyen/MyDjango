@@ -7,7 +7,7 @@ import time
 import traceback
 from django.conf import settings
 from django.core.cache import cache
-from utility.util_django import *
+from util_django import *
 
 
 __author__ = 'wangsy'

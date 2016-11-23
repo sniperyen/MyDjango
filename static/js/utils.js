@@ -161,3 +161,70 @@ function sync_post(url, params){
          }
      })
 }
+
+// 添加气泡提示消息
+function add_tip(criteria, tip){
+    $(criteria).on("mouseover", function(){
+        var d = dialog({
+            content: tip,
+            quickClose: true// 点击空白处快速关闭
+        });
+        d.show($(this)[0]);
+    });
+}
+
+// 字符串是否在数组中
+function in_array(stringToSearch, arrayToSearch) {
+    for (s = 0; s < arrayToSearch.length; s++) {
+        thisEntry = arrayToSearch[s].toString();
+        if (thisEntry == stringToSearch) {
+            return true;
+        }
+    }
+    return false;
+}
+
+// 格式化时间
+var formatDateTime = function (date) {
+    var y = date.getFullYear();
+    var m = date.getMonth() + 1;
+    m = m < 10 ? ('0' + m) : m;
+    var d = date.getDate();
+    d = d < 10 ? ('0' + d) : d;
+    var h = date.getHours();
+    var minute = date.getMinutes();
+    minute = minute < 10 ? ('0' + minute) : minute;
+    return y + '-' + m + '-' + d+' '+h+':'+minute;
+};
+
+// 获取一个时间段
+function get_start_end_time(_type){
+    var now = new Date();
+    var endtime = formatDateTime(now);
+    var starttime;
+    switch (_type){
+        case "real_time":  // 十分钟
+            starttime = now.setMinutes(now.getMinutes()-10);
+            break;
+        case "last_three_hours":
+            starttime = now.setHours(now.getHours()-3);
+            break;
+        case "last_one_day":
+            starttime = now.setHours(now.getHours()-24);
+            break;
+        case "last_one_week":
+            starttime = now.setDate(now.getDate()-7);
+            break;
+        case "last_one_month":
+            starttime = now.setMonth(now.getMonth()-1);
+            break;
+        case "last_three_month":
+            starttime = now.setMonth(now.getMonth()-3);
+            break;
+        default:
+            alert('没有定义的方式： ' + _type);
+    }
+    starttime = new Date(starttime);  // 把时间戳转换为时间格式
+    starttime = formatDateTime(starttime);  // 把时间格式转换为字符串
+    return [starttime, endtime];
+}
