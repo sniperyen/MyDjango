@@ -46,29 +46,15 @@
 {% endblock %}
 
 
-{% block inline_scripts %}
-    <script>
-        $(function () {
-            console.log('xxx');
-            $('#mytable').dataTable({
-{#                "processing": true,#}
-                "serverSide": true,
-                "ajax": "{% url 'proxy_list_json' %}", //给服务器发请求的url
+{% block list_scripts %}
+    <script type="text/javascript">
+        var node_option = {
+            "serverSide": true,
+            "ajax": "{% url 'proxy_list_json' %}", //给服务器发请求的url
+        };
+        var option = $.extend(true, node_option, dt_option);
+        $('#mytable').dataTable(option);
 
-                {#                "paging": true,#}
-                {#                "lengthChange": true,#}
-                {#                "searching": true,#}
-                {#                "ordering": true,#}
-                {#                "info": true,#}
-                {#                "autoWidth": true,#}
-                {#                "lengthMenu": [[20, 50, 100, -1], [20, 50, 100, "All"]],#}
-                {#                "sPaginationType": "full_numbers",#}
-                {#                "bProcessing": true, //开启读取服务器数据时显示正在加载中……特别是大数据量的时候，开启此功能比较好#}
-                {#                "bServerSide": true, //开启服务器模式#}
-                {#                "sAjaxSource": "{% url 'proxy_list_json' %}", //给服务器发请求的url#}
-
-            });
-        })
     </script>
 
 {% endblock %}
