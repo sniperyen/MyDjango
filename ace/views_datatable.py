@@ -13,7 +13,6 @@ from ace.models import Node
 
 
 class ProxyListJson(BaseDatatableView):
-    # The model we're going to show
     model = Node  # 要分页的类
 
     # define the columns that will be returned

@@ -23,7 +23,8 @@ INSTALLED_APPS = (
 
     # 第三方应用
     'debug_toolbar',  # 调试工具
-    # 'django_filters',
+    'django_filters',
+    'django_extensions',  # django扩展功能 http://django-extensions-zh.readthedocs.io/zh_CN/latest/command_extensions.html
     'reversion',
     'rest_framework',  # 提供api  http://www.django-rest-framework.org/api-guide/
     'djcelery',  # 定时
