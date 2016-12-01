@@ -23,14 +23,20 @@ INSTALLED_APPS = (
 
     # 第三方应用
     'debug_toolbar',  # 调试工具
-    'django_filters',
+    'reversion',  # 为模型提供版本控制功能，稍微配置后，就可以恢复已经删除的模型或回滚到模型历史中的任何一点
     'django_extensions',  # django扩展功能 http://django-extensions-zh.readthedocs.io/zh_CN/latest/command_extensions.html
-    'reversion',
+    # 'djcelery',  # 用来管理异步、分布式的消息作业队列
     'rest_framework',  # 提供api  http://www.django-rest-framework.org/api-guide/
-    'djcelery',  # 定时
-    'Lib.bootstrap3',  # 样式
+    'djcelery',  # 异步任务和定时任务
     'crispy_forms',  # 模板定义  http://django-crispy-forms.readthedocs.io/en/latest/
     'xadmin',  # 后台管理 https://github.com/sshwsfc/xadmin
+
+    # 直接加在项目中第三方包
+    'Lib.bootstrap3',  # 给django的form提供boostrap样式
+
+    # 将使用的第三方包
+    # 'django-guardian', # 实现object级别的权限控制
+    # 'django-oauth-toolkit', # 实现数据、逻辑的OAuth2功能
 
     # 测试应用
     'demo_bootstrap',  # bootstrap的一个示例app
