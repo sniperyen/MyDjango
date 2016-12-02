@@ -16,6 +16,8 @@ class Node(models.Model):
     node_remarks = models.CharField(verbose_name='备注', max_length=255, blank=True)
     node_signtime = models.DateField(auto_now_add=True)
 
+    def get_node_names_display(self):
+        return 'xxxx'
 
     # 返回相应的值
     def __unicode__(self):

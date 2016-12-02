@@ -34,7 +34,7 @@ INSTALLED_APPS = (
     # 直接加在项目中第三方包
     'Lib.bootstrap3',  # 给django的form提供boostrap样式
 
-    # 将使用的第三方包
+    # 将试用的第三方包
     # 'django-guardian', # 实现object级别的权限控制
     # 'django-oauth-toolkit', # 实现数据、逻辑的OAuth2功能
 

@@ -1,7 +1,7 @@
 # coding=utf-8
 from django.db.models import Q
 from django.shortcuts import render_to_response
-from django_datatables_view.base_datatable_view import BaseDatatableView
+from Lib.django_datatables_view.base_datatable_view import BaseDatatableView
 
 from ace.models import Node
 
@@ -14,6 +14,7 @@ from ace.models import Node
 
 class ProxyListJson(BaseDatatableView):
     model = Node  # 要分页的类
+    search_condition = 'istartswith'
 
     # define the columns that will be returned
     columns = ['node_name', 'node_type', 'node_address', 'node_contact', 'node_remarks']  # 需要显示的字段
@@ -30,15 +31,3 @@ class ProxyListJson(BaseDatatableView):
 
     def render_column(self, row, column):
         return super(ProxyListJson, self).render_column(row, column)
-
-    def filter_queryset(self, qs):
-        # use parameters passed in GET request to filter queryset
-        qs_params = None
-        search = self.request.GET.get(u'sSearch', None)
-        if search:  # 模糊搜索
-            q = Q(node_name__contains=search) | Q(node_address__contains=search)
-            qs_params = qs_params | q if qs_params else q
-
-            qs = qs.filter(qs_params)
-
-        return qs

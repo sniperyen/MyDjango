@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block content %}
+    <button class="btn btn-primary btn-sm" id="add">添加</button>
     <div class="row">
         <div class="col-xs-12">
             <table id="mytable" class="table table-striped table-bordered table-hover">
@@ -25,13 +26,20 @@
 
 {% block list_scripts %}
     <script type="text/javascript">
+
+    $(function () {
         var node_option = {
             "serverSide": true,
             "ajax": "{% url 'proxy_list_json' %}", //给服务器发请求的url
+            dom: 'Bfrtip',
+            buttons: ['colvis', 'excel', 'print']
+
         };
         var option = $.extend(true, node_option, dt_option);
-        $('#mytable').dataTable(option);
+        var table = $('#mytable').dataTable(option);
+        console.log(table);
 
+    })
     </script>
 
 {% endblock %}
