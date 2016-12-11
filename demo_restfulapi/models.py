@@ -9,6 +9,7 @@ class User(models.Model):
     class Meta:
         db_table = 'user'
 
+
 class Article(models.Model):
     STATUS_SET = (
             (0, "草稿"),
