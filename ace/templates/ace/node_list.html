@@ -1,4 +1,5 @@
 {% extends "base_list.html" %}
+{% load table_tags %}
 
 {% block description %}
     其它资源都必须添加到相应的节点上，所以节点起码要有一个
@@ -8,17 +9,24 @@
     <button class="btn btn-primary btn-sm" id="add">添加</button>
     <div class="row">
         <div class="col-xs-12">
-            <table id="mytable" class="table table-striped table-bordered table-hover">
-                <thead>
-                <tr>
-                    <th data-rel="机构名称">机构名称</th>
-                    <th>机构分类</th>
-                    <th>机构地址</th>
-                    <th>联系人</th>
-                    <th>备注</th>
-                </tr>
-                </thead>
-            </table>
+            {% render_table object_list %}
+
+{#            <table id="mytable" class="table table-striped table-bordered table-hover">#}
+{#                <thead>#}
+{#                <tr>#}
+{#                    <th>#}
+{#                        <input type="checkbox" class="checkall"/>#}
+{#                    </th>#}
+{#                    <th>机构名称</th>#}
+{#                    <th>机构分类</th>#}
+{#                    <th>机构地址</th>#}
+{#                    <th>联系人</th>#}
+{#                    <th>备注</th>#}
+{#                    <th>创建时间</th>#}
+{#                    <th></th>#}
+{#                </tr>#}
+{#                </thead>#}
+{#            </table>#}
         </div>
     </div>
 {% endblock %}
@@ -27,18 +35,48 @@
 {% block list_scripts %}
     <script type="text/javascript">
 
-    $(function () {
-        var node_option = {
-            "serverSide": true,
-            "ajax": "{% url 'proxy_list_json' %}", //给服务器发请求的url
-            dom: 'Bfrtip',
-            buttons: ['colvis', 'excel', 'print']
+{#        $(function () {#}
+{#            var node_option = {#}
+{#                "serverSide": true,#}
+{#                "ajax": "{% url 'proxy_list_json' %}", // 给服务器发请求的url#}
+{#                "aaSorting": [  // 初始化排序方式#}
+{#                    [ 6, "desc"],#}
+{#                ],#}
+{#                "columns": [#}
+{#                    {#}
+{#                        "data": "id",#}
+{#                        "render": function (data, type, full, meta) {#}
+{#                            console.log(data);#}
+{#                            return '<input type="checkbox"  class="checkchild"  value="' + data + '" />';#}
+{#                        },#}
+{#                        "sClass": "text-center",#}
+{#                        "bSortable": false#}
+{#                    },#}
+{#                    {"data": "node_name"},#}
+{#                    {"data": "node_type"},#}
+{#                    {"data": "node_address"},#}
+{#                    {"data": "node_contact"},#}
+{#                    {"data": "node_remarks"},#}
+{#                    {"data": "node_signtime"},#}
+{#                    {#}
+{#                        "data": "id",#}
+{#                        "render": function (data, type, full, meta) {#}
+{#                            return ' <a href="" class="tooltip-info" data-rel="tooltip" title="详情">' +#}
+{#                                    '<span class="blue"><i class="icon-zoom-in bigger-120"></i></span>' +#}
+{#                                    '</a>'+' <a href="" class="tooltip-info" data-rel="tooltip" title="编辑">' +#}
+{#                                    '<span class="blue"><i class="icon-edit bigger-120"></i></span>' +#}
+{#                                    '</a>'#}
+{#                        },#}
+{#                        "bSortable": false#}
+{#                    }#}
+{#                ]#}
+{##}
+{#            };#}
+{#            var option = $.extend(true, node_option, dt_option);#}
+{#            var t = $('#mytable').dataTable(option);#}
+{#            console.log(t);#}
+{#        })#}
 
-        };
-        var option = $.extend(true, node_option, dt_option);
-        var t = $('#mytable').dataTable(option);
-        console.log(t);
-    })
     </script>
 
 {% endblock %}

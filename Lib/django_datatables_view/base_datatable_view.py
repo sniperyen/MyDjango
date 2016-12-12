@@ -14,12 +14,19 @@ class DatatableMixin(object):
     """ JSON data for datatables
     """
     model = None
-    columns = []
-    order_columns = []
-    search_condition = 'contains'  # istartswith
+    columns = []  # 需要返回的列
+    order_columns = []  # 需要排序的列
     max_display_length = 100  # max limit of records returned, do not allow to kill our server by huge sets of data
     pre_camel_case_notation = False  # datatables 1.10 changed query string parameter names
     none_string = ''
+
+    # 以那种方式来搜索,可选项 (contains 或 istartswith)
+    search_condition = 'contains'
+
+    # 列中数据,是否是以dict形式返回
+    # 默认为True, 返回格式为 [[{"id": 1}, {"name": "sy"}], [{"id": 2}, {"name": "sj"}], ],
+    # 如果是False,返回格式为 [[1, "sy"], [2, "sj"]]
+    column_is_dict = True
 
     @property
     def _querydict(self):
@@ -108,8 +115,10 @@ class DatatableMixin(object):
             if isinstance(sortcol, list):
                 for sc in sortcol:
                     order.append('{0}{1}'.format(sdir, sc.replace('.', '__')))
-            else:
+            elif sort_col:
                 order.append('{0}{1}'.format(sdir, sortcol.replace('.', '__')))
+            else:
+                pass
 
         if order:
             return qs.order_by(*order)
@@ -183,9 +192,14 @@ class DatatableMixin(object):
         return qs
 
     def prepare_results(self, qs):
+        # 可以返回列表组成列表,也可以返回字典组成的列表,看前端页面需要怎样的结构
         data = []
+        columns = self.get_columns()
         for item in qs:
-            data.append([self.render_column(item, column) for column in self.get_columns()])
+            if self.column_is_dict:
+                data.append([self.render_column(item, column) for column in columns])
+            else:
+                data.append(dict([(column, self.render_column(item, column)) for column in columns]))
         return data
 
     def get_context_data(self, *args, **kwargs):

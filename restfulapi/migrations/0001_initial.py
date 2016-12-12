@@ -42,6 +42,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='article',
             name='author',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='entries', to='demo_restfulapi.User'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='entries', to='restfulapi.User'),
         ),
     ]

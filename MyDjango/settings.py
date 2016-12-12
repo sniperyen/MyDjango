@@ -30,6 +30,7 @@ INSTALLED_APPS = (
     'djcelery',  # 异步任务和定时任务
     'crispy_forms',  # 模板定义  http://django-crispy-forms.readthedocs.io/en/latest/
     'xadmin',  # 后台管理 https://github.com/sshwsfc/xadmin
+    'table',
 
     # 直接加在项目中第三方包
     'Lib.bootstrap3',  # 给django的form提供boostrap样式
@@ -41,7 +42,7 @@ INSTALLED_APPS = (
     # 测试应用
     'demo_bootstrap',  # bootstrap的一个示例app
     'demo_celery',
-    'demo_restfulapi',
+    'restfulapi',  # 向外提供restfulapi服务
     'ace',
     'customer',
 

@@ -3,8 +3,8 @@ from django.conf.urls import patterns, include, url
 from django.conf import settings
 
 from ace.views_datatable import ProxyListJson
-from ace.views import HomePageView, lists, add, edit, delete
-from demo_restfulapi.urls import router
+from ace.views import HomePageView, lists, add, edit, delete, NodeListView
+from restfulapi.urls import router
 
 from django.contrib import admin
 admin.autodiscover()
@@ -32,6 +32,10 @@ urlpatterns = patterns(
     # restfulapi
     url(r'^api/', include(router.urls, namespace="customer")),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+
+    url(r'^table/', include('table.urls')),  # jquery_databases用到ajax获取数据时,会用到这里的请求
+    url(r'^node_list/$', NodeListView.as_view(), name='node_list'),
+
 
     url(r"^lists/(?P<table>\w+)/$", lists, name="lists"),
     url(r"^add(?P<table>\w+)/$", add, name="add"),

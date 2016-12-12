@@ -12,6 +12,7 @@ from django.views.generic import TemplateView
 from ace.forms import LineForm
 from ace.forms import NodeForm, DeviceForm
 from ace.models import Node, Line, Device
+from ace.tables import NodeTable
 from utils.util_web import TemplateViewBase, ListViewBase
 
 
@@ -40,11 +41,21 @@ class CommonListView(ListViewBase):
     pass
 
 
+from table.views import FeedDataView
+
+
+class NodeListView(FeedDataView):
+    token = NodeTable.token
+
+    def get_queryset(self):
+        return super(NodeListView, self).get_queryset().filter(id__gt=5)
+
+
 # 显示各列表信息
 def lists(request, table):
-    # 从根据不同的请求，来获取相应的数据,并跳转至相应页面
     if table == 'node':
         data = Node.objects.all()
+        data = NodeTable(data)
         list_template = 'ace/node_list.html'
         sub_title = '节点管理'
     if table == 'line':
