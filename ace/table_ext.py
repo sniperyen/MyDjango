@@ -22,33 +22,26 @@ class IconLink(Link):
     def __init__(self, operation="edit", *args, **kwargs):
         super(IconLink, self).__init__(*args, **kwargs)
 
-        self.attrs['data-rel'] = "tooltip"
+        self.base_attrs['data-rel'] = "tooltip"
         operation_dict = {
             'edit': ["tooltip-success", '编辑', 'green', 'icon-edit'],
             'delete': ["tooltip-error", '删除', 'red', 'icon-trash'],
             'view': ["tooltip-info", '详情', 'blue', 'icon-zoom-in'],
         }
-        if operation not in operation_dict:
-            raise TypeError('the operation (%s) is not exists' % operation)
+        self.operation_attr = operation_dict.get(operation)
+        if not self.operation_attr:
+            raise TypeError('the operation (%s) is not defined' % operation)
 
-        operation_attr = operation_dict.get(operation)
-        self.attrs['class'] = operation_attr[0]
-        self.attrs['title'] = operation_attr[1]
-        self.span = """
+        self.base_attrs['class'] = self.operation_attr[0]
+        self.base_attrs['title'] = self.operation_attr[1]
+
+    @property
+    def text(self):
+        template = Template("""
             <span class="%s">
                 <i class="%s bigger-120"></i>
             </span>
-        """ % (operation_attr[2], operation_attr[3])
+        """ % (self.operation_attr[2], self.operation_attr[3]))
+        return template.render(Context())
 
 
-    def render(self, obj):
-        """ Render link as HTML output tag <a>.
-        """
-        self.obj = obj
-        attrs = ' '.join([
-             '%s="%s"' % (attr_name, attr.resolve(obj))
-             if isinstance(attr, Accessor)
-             else '%s="%s"' % (attr_name, attr)
-             for attr_name, attr in self.attrs.items()
-             ])
-        return '<a %s>%s</a>' % (attrs, self.span)

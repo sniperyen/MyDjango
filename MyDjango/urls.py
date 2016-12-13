@@ -37,10 +37,11 @@ urlpatterns = patterns(
     url(r'^node_list/$', NodeListView.as_view(), name='node_list'),
 
 
-    url(r"^lists/(?P<table>\w+)/$", lists, name="lists"),
-    url(r"^add(?P<table>\w+)/$", add, name="add"),
-    url(r'^edit/(?P<table>\w+)/(?P<pk>\d+)/$', edit, name='edit'),
-    url(r'^delete/(?P<table>\w+)/(?P<pk>\d+)/$', delete, name='delete'),
+    url(r"^lists/(?P<table>\w+)/$", lists, name="lists"),  # 列表
+    url(r"^add(?P<table>\w+)/$", add, name="add"),  # 新增
+    url(r'^view/(?P<table>\w+)/(?P<pk>\d+)/$', edit, name='view'),  # 只读
+    url(r'^edit/(?P<table>\w+)/(?P<pk>\d+)/$', edit, name='edit'),  # 可编辑
+    url(r'^delete/(?P<table>\w+)/(?P<pk>\d+)/$', delete, name='delete'),  # 删除
 
     url(r'^paging_proxy/$', ProxyListJson.as_view(), name='proxy_list_json'),
 )

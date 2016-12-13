@@ -6,6 +6,7 @@ from table.columns.base import ColumnHeader
 
 from ace.models import Node
 from table.utils import A
+
 # 参考: https://github.com/shymonk/django-datatable
 from ace.table_ext import IconLink
 
@@ -19,8 +20,12 @@ class NodeTable(Table):
     node_contact = Column(field='node_contact', header='联系人')
     node_remarks = Column(field='node_remarks', header='备注')
     node_signtime = Column(field='node_signtime', header='创建时间')
-    action = LinkColumn(header='操作', links=[Link(text='编辑', viewname='edit', args=('node',A('id'))),Link(text='删除', viewname='delete', args=('node',A('id'))),])
-    # action = LinkColumn(header='操作', links=[IconLink(operation='edit', viewname='edit', args=('node',A('id'))), IconLink(operation='delete', viewname='delete', args=('node',A('id')))])
+    action = LinkColumn(header='操作',
+                        links=[
+                            IconLink(operation='view', viewname='view', args=('node', A('id'))),
+                            IconLink(operation='edit', viewname='edit', args=('node', A('id'))),
+                            IconLink(operation='delete', viewname='delete', args=('node', A('id')))]
+                        )
 
     class Meta:
         model = Node
